@@ -21,7 +21,7 @@ class SearchZipcode extends Component
     protected array $rules = [
         'zipcode' =>        ['required'],
         'street' =>         ['required'],
-        'neigborhood' =>    ['required'],
+        'neighborhood' =>    ['required'],
         'city' =>           ['required'],
         'state' =>          ['required', 'max:2'],
 
@@ -36,10 +36,10 @@ class SearchZipcode extends Component
     ];
 
 
-    public function mount():void{
+    // public function mount():void{
         
-        $this->addresses = Address::all()->toArray();  
-      }
+    //     $this->addresses = Address::all()->toArray();  
+    //   }
     
     //metodo magico para fazer requisição após sair do input    
     public function updatedZipcode(string $value){
@@ -77,20 +77,23 @@ class SearchZipcode extends Component
                 ],
                 [   //salva no banco 
                     'street' => $this->street,
-                    'neighborhood' => $this->neigborhood,
+                    'neighborhood' => $this->neighborhood,
                     'city' => $this->city,
                     'state' => $this->state,
                     
                     
                 ]
                 
+                
         );
+        $this->addresses = Address::all()->toArray();  
         //resetando formulario inteiro
         $this->reset();
             // dd('salvou', $this);//pega os valores magicamente do metodo zipcode
         }
         public function render()
         {
+            $this->addresses = Address::all()->toArray();  
             return view('livewire.search-zipcode');
         }
 }

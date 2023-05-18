@@ -42,7 +42,8 @@
 
     </form>
     <hr>
-    <table class="table-fixed hover:table-fixed">
+    <div>
+    <table class="table-fixed md:table-fixed justify-center items-center text-center hover:table-fixed">
         <thead>
           <tr>
             <th>ID</th>
@@ -73,3 +74,4 @@
         </tbody>
     </table>    
 </div>
+
