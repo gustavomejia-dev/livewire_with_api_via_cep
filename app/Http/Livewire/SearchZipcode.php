@@ -9,10 +9,13 @@ use Livewire\Component;
 
 use App\Models\Address;
 use Illuminate\Support\Facades\Http;
+use WireUi\Traits\Actions;
 class SearchZipcode extends Component
 
-{   public array $addresses = [];// aonde vai vim os dados
-
+{   
+    use Actions;
+    public array $addresses = [];// aonde vai vim os dados
+    public string $email = '';
     public string $zipcode = '';
     public string $street = '';
     public string $neighborhood= '';
@@ -69,13 +72,14 @@ class SearchZipcode extends Component
         "siafi" => "7107"
         */
         public function save():void{
-            
             $this->validate();//chamando metodo de validação
            Address::updateOrCreate(
                 [
                     'zipcode' => $this->zipcode,//condição where
                 ],
-                [   //salva no banco 
+                [   
+                    //salva no banco 
+                    'email' => $this->email,
                     'street' => $this->street,
                     'neighborhood' => $this->neighborhood,
                     'city' => $this->city,
@@ -85,15 +89,24 @@ class SearchZipcode extends Component
                 ]
                 
                 
+                
         );
-        $this->addresses = Address::all()->toArray();  
+        
+        $this->render();  
         //resetando formulario inteiro
-        $this->reset();
+        $this->resetExcept('addresses');
             // dd('salvou', $this);//pega os valores magicamente do metodo zipcode
         }
         public function render()
         {
             $this->addresses = Address::all()->toArray();  
             return view('livewire.search-zipcode');
+        }
+
+        public function editarSuccess(){
+            
+        }
+        public function modalEdit(){
+
         }
 }

@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{config('app.name')}}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+   
+    @vite('resources/css/app.css')
     @livewireStyles
 </head>
 <body>
+    
    {{$slot}} 
+   
+   
 
-   @livewireScripts
+    @livewireScripts
+    @wireUiScripts
+    <script src="//unpkg.com/alpinejs" defer></script>
 </body>
 </html>
