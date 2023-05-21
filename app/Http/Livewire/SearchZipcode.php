@@ -2,111 +2,87 @@
 
 namespace App\Http\Livewire;
 
-
-
-
+use App\Actions\AddressEditAction;
+use App\Actions\AddressStoreAction;
+use App\Http\Livewire\Traits\AddressPropertiesRulesTrait;
+use App\Http\Livewire\Traits\AddressPropertiesMessagesTrait;
 use Livewire\Component;
 
 use App\Models\Address;
-use Illuminate\Support\Facades\Http;
 use WireUi\Traits\Actions;
+use App\Services\ViaCepService;
 class SearchZipcode extends Component
 
 {   
     use Actions;
-    public array $addresses = [];// aonde vai vim os dados
-    public string $email = '';
-    public string $zipcode = '';
-    public string $street = '';
-    public string $neighborhood= '';
-    public string $city = '';
-    public string $state = '';
-    protected array $rules = [
-        'zipcode' =>        ['required'],
-        'street' =>         ['required'],
-        'neighborhood' =>    ['required'],
-        'city' =>           ['required'],
-        'state' =>          ['required', 'max:2'],
+    use AddressPropertiesRulesTrait;
+    use AddressPropertiesMessagesTrait;
 
-    ];//validações de request
-    protected $messages = [//validações com menssagens
-        'zipcode.required' => 'o Campo CEP É obrigatório',
-        'street.required' => 'o Campo ENdereço É obrigatório',
-        'neighborhood.required' => 'o Campo BAIRRO É obrigatório',
-        'city.required' => 'o Campo CIDADE É obrigatório',
-        'state.required' => 'o Campo Estado  É obrigatório',
-        'state.max'       => 'PREENCHA COORRETAMENTE'
-    ];
+    public array $data = [];
+    // public array $addresses = [];// aonde vai vim os dados
+ 
 
 
-    // public function mount():void{
-        
-    //     $this->addresses = Address::all()->toArray();  
-    //   }
+    public function mount():void{
+        $this->data = AddressEditAction::getEmptyProperties();
+         
+      }
+
+    //o nome do método tem que estár no singular, igual ao da model  
+    public function  getAddressProperty(){//propiedades computadas para mostra todos os dados
+        $adress = Address::paginate(5);
+        return $adress;
+    }
     
     //metodo magico para fazer requisição após sair do input    
-    public function updatedZipcode(string $value){
-       
+    public function updated(string $key, string $value):void{//key é o name do input e value o cep que vai na API
+        if($key === 'data.zipcode'){
+            // dd($this->data['email']);
+            $this->data = ViaCepService::handle($value, $this->data['email']);
+            
+            
+        
+        
+        }
         //$value é o valor retornado do input
-        $response = Http::get("https://viacep.com.br/ws/{$value}/json/")->json();
-        //iniciando os inputs(atributis) com o retorno da API
-        // dd($response['bairro']);
-        $this->zipcode = $response['cep'];
-        $this->neighborhood = $response['bairro'];
-        $this->street = $response['logradouro'];
-        $this->state= $response['uf'];
-        $this->city = $response['localidade'];
+        
        
         
         }
-        /*
-        "cep" => "02865-090"
-        "logradouro" => "Rua Inácio Xavier de Carvalho"
-        "complemento" => ""
-        "bairro" => "Vila Penteado"
-        "localidade" => "São Paulo"
-        "uf" => "SP"
-        "ibge" => "3550308"
-        "gia" => "1004"
-        "ddd" => "11"
-        "siafi" => "7107"
-        */
         public function save():void{
+            sleep(2);
             $this->validate();//chamando metodo de validação
-           Address::updateOrCreate(
-                [
-                    'zipcode' => $this->zipcode,//condição where
-                ],
-                [   
-                    //salva no banco 
-                    'email' => $this->email,
-                    'street' => $this->street,
-                    'neighborhood' => $this->neighborhood,
-                    'city' => $this->city,
-                    'state' => $this->state,
-                    
-                    
-                ]
-                
-                
-                
-        );
+           
+            AddressStoreAction::save($this->data);
+            $this->showNotification('Endereço criado com sucesso', 'O endereço foi criado com sucesso !');
         
-        $this->render();  
-        //resetando formulario inteiro
-        $this->resetExcept('addresses');
-            // dd('salvou', $this);//pega os valores magicamente do metodo zipcode
+            $this->render();  
+            //resetando formulario inteiro
+            $this->resetExcept('addresses');
+                // dd('salvou', $this);//pega os valores magicamente do metodo zipcode
         }
         public function render()
         {
-            $this->addresses = Address::all()->toArray();  
+            // $this->addresses = Address::all()->toArray(); //Carrega todos os dados 
             return view('livewire.search-zipcode');
         }
 
-        public function editarSuccess(){
+        public function remove(string $id):void{
+
+           Address::find($id)?->delete();
+            $this->showNotification('Exclusão de Endereço', 'Endereço excluido com sucesso');
+        }
+
+        public function edit($id){
+
+            $this->data = AddressEditAction::handle($id);
             
         }
-        public function modalEdit(){
-
+        private function showNotification(string $title, string $message):void{
+            // $this->render();
+            $this->notification()->success(
+                $title,
+                $message, 
+            );
         }
 }
