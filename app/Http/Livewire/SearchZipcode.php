@@ -20,8 +20,10 @@ class SearchZipcode extends Component
 
     public array $data = [];
     // public array $addresses = [];// aonde vai vim os dados
- 
+    
+    public string $search = '';
 
+    protected $queryString = ['search'];
 
     public function mount():void{
         $this->data = AddressEditAction::getEmptyProperties();
@@ -30,6 +32,12 @@ class SearchZipcode extends Component
 
     //o nome do método tem que estár no singular, igual ao da model  
     public function  getAddressProperty(){//propiedades computadas para mostra todos os dados
+        if ($this->search){
+            // dd('temos uma busca'. $this->search);
+            //se tiver algo no input search ele já faz a requisição
+            $address = Address::where('street', 'like' , "%{$this->search}%")->paginete(2);
+            return $address;
+        }
         $adress = Address::paginate(5);
         return $adress;
     }
@@ -85,4 +93,5 @@ class SearchZipcode extends Component
                 $message, 
             );
         }
+    
 }

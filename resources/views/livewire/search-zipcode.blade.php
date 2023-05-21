@@ -33,6 +33,7 @@
     </form>
     <hr class="mt-2">
     <div class = "my-8 w-1/2 container mx-auto bg-gray-200">
+        <x-input wire:model="search" label="Buscar rua" placeholder="Informe o nome da rua" />
     <table class="table-auto mx-auto">
         <thead>
           <tr>
@@ -66,6 +67,8 @@
         </tbody>
     </table>    
     {{-- paginete --}}
-    {!! $this->address->links() !!} 
+    <div class="flex justify-end">
+        {!! $this->address->links() !!} 
+    </div>
 </div>
 
