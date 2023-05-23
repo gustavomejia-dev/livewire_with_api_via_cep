@@ -32,8 +32,16 @@
 
     </form>
     <hr class="mt-2">
-    <div class = "my-8 w-1/2 container mx-auto bg-gray-200">
+    <div class = "mt-3 mx-auto container w-1/2">
+        <h1 class = "justify-center text-center text-stone-500">Quantidade de resultados: {{$this->address->total()}}</h1>
+        
+    </div>
+
+    <div class =  "mt-3 mx-auto container w-20">
         <x-input wire:model="search" label="Buscar rua" placeholder="Informe o nome da rua" />
+    </div>
+
+    <div class = "py-3 my-8 w-1/2 container mx-auto bg-gray-200">
         {{-- <x-button wire:click="search" spinner="save" green label="Pesquisar" /> --}}
     <table class="table-auto mx-auto">
         <thead>
