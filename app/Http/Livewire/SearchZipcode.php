@@ -4,9 +4,12 @@ namespace App\Http\Livewire;
 
 use App\Actions\AddressEditAction;
 use App\Actions\AddressStoreAction;
+use App\Actions\AddressSearchAction;
 use App\Http\Livewire\Traits\AddressPropertiesRulesTrait;
 use App\Http\Livewire\Traits\AddressPropertiesMessagesTrait;
 use Livewire\Component;
+
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Address;
 use WireUi\Traits\Actions;
@@ -33,20 +36,29 @@ class SearchZipcode extends Component
     //o nome do método tem que estár no singular, igual ao da model  
     public function  getAddressProperty(){//propiedades computadas para mostra todos os dados
         if ($this->search){
-            // dd('temos uma busca'. $this->search);
             //se tiver algo no input search ele já faz a requisição
-            $address = Address::where('street', 'like' , "%{$this->search}%")->paginete(2);
-            return $address;
+            return Address::where('zipcode', 'like', "%{$this->search}%")->paginate(5);
+          
         }
-        $adress = Address::paginate(5);
-        return $adress;
+        $address = Address::paginate(5);
+        return $address;
+  
     }
     
     //metodo magico para fazer requisição após sair do input    
     public function updated(string $key, string $value):void{//key é o name do input e value o cep que vai na API
         if($key === 'data.zipcode'){
             // dd($this->data['email']);
-            $this->data = ViaCepService::handle($value, $this->data['email']);
+            $data = ViaCepService::handle($value, $this->data['email']);
+            if ($data == null){
+                $this->showNotification('error','CEP INVALIDO', 'Por favor informe um CEP Válido !');
+            }
+            else{
+                $this->data = $data;
+            }
+            
+
+            
             
             
         
@@ -62,7 +74,7 @@ class SearchZipcode extends Component
             $this->validate();//chamando metodo de validação
            
             AddressStoreAction::save($this->data);
-            $this->showNotification('Endereço criado com sucesso', 'O endereço foi criado com sucesso !');
+            $this->showNotification('success','Endereço criado com sucesso', 'O endereço foi criado com sucesso !');
         
             $this->render();  
             //resetando formulario inteiro
@@ -78,7 +90,7 @@ class SearchZipcode extends Component
         public function remove(string $id):void{
 
            Address::find($id)?->delete();
-            $this->showNotification('Exclusão de Endereço', 'Endereço excluido com sucesso');
+            $this->showNotification('success', 'Exclusão de Endereço', 'Endereço excluido com sucesso');
         }
 
         public function edit($id){
@@ -86,12 +98,15 @@ class SearchZipcode extends Component
             $this->data = AddressEditAction::handle($id);
             
         }
-        private function showNotification(string $title, string $message):void{
+        private function showNotification(string $method, string $title, string $message):void{
             // $this->render();
-            $this->notification()->success(
+            $this->notification()->$method(
                 $title,
                 $message, 
             );
         }
+
+   
+    
     
 }
