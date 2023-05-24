@@ -37,7 +37,7 @@
         
     </div>
 
-    <div class =  "mt-3 mx-auto container w-20">
+    <div class =  "mt-3 mx-auto container w-1/2">
         <x-input wire:model="search" label="Buscar rua" placeholder="Informe o nome da rua" />
     </div>
 
