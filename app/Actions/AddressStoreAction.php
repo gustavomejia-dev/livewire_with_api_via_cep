@@ -2,19 +2,20 @@
 
 namespace App\Actions;
 use App\Models\Address;
+use App\Models\User;
 class AddressStoreAction {
 
 
 
     public static function save(array $data):void{
-        Address::updateOrCreate(
+       
+        $address = Address::updateOrCreate(
             [
                 'zipcode' => $data['zipcode'],//condição where
             ],
             [   
                 //salva no banco 
                 
-                'email' => $data['email'],
                 'street' => $data['street'],
                 'neighborhood' => $data['neighborhood'],
                 'city' => $data['city'],
@@ -23,5 +24,18 @@ class AddressStoreAction {
                 
             ]
             );
+           
+            
+        User::create([
+            'name' => $data['name'],
+            'email'  => $data['email'],
+            'celular' => $data['celular'],
+            'address_id' => $address->id,
+            'password' => $data['password'],
+        ]);
+
+        
+        
+ 
     }
 }

@@ -4,7 +4,16 @@
     <h1 class="text-center">Informações para Entrega</h1>
     <form class = "rounded-md p-8 bg-blue-100 mx-auto w-1/2 border-solid border-4 border-light-blue-500">
         <div class="flex flex-col w-1/2">
+            <x-input wire:model.defer="data.name" label="Nome" placeholder="Name" />
+        </div>
+        <div class="flex flex-col w-1/2">
             <x-input wire:model.defer="data.email" label="Email" placeholder="Email" />
+        </div>
+        <div class="flex flex-col w-1/2">
+            <x-input wire:model.defer="data.celular" label="Celular" placeholder="Celular" />
+        </div>
+        <div class="flex flex-col w-1/2">
+            <x-input wire:model.defer="data.password" label="Senha" placeholder="Senha" />
         </div>
         
         <div class="flex flex-col w-1/2">
@@ -25,6 +34,7 @@
         <div class = 'mt-3'>
             <x-button wire:click="save" spinner="save" green label="Cadastrar" />
             <x-button wire:click="save" spinner="reset" dark label="Limpar" />
+            
         </div>
      
         

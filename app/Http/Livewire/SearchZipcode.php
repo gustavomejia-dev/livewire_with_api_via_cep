@@ -12,6 +12,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Address;
+use App\Models\User;
 use WireUi\Traits\Actions;
 use App\Services\ViaCepService;
 class SearchZipcode extends Component
@@ -30,6 +31,7 @@ class SearchZipcode extends Component
 
     public function mount():void{
         $this->data = AddressEditAction::getEmptyProperties();
+        
          
       }
 
@@ -37,11 +39,25 @@ class SearchZipcode extends Component
     public function  getAddressProperty(){//propiedades computadas para mostra todos os dados
         if ($this->search){
             //se tiver algo no input search ele já faz a requisição
-            return Address::where('zipcode', 'like', "%{$this->search}%")->paginate(5);
+            // dd($this->search);
+            // return Address::where('zipcode', 'like', "%{$this->search}%")->paginate(5);
+            $teste =  $searchUsers = DB::table('users')->join('addresses', 'addresses.id', '=', 'users.id')->where('addresses.zipcode','like ', '%023%')->get();
+            dd($teste);
+            $searchUsers = DB::table('users')->join('addresses', 'addresses.id', '=', 'users.id')->where('addresses.zipcode', 'like', "%{$this->search}%")->paginate(2);
+            // dd($searchUsers);
+            // dd($searchUsers);
+            return $searchUsers;
           
         }
-        $address = Address::paginate(5);
-        return $address;
+        $infoUsers = DB::table('users')
+             ->join('addresses', 'addresses.id', '=', 'users.id')
+             ->select('*')
+             ->paginate(5);
+        return $infoUsers;    
+        // dd($query);
+
+        // $address = Address::paginate(5);
+        // return $address;
   
     }
     
@@ -49,12 +65,13 @@ class SearchZipcode extends Component
     public function updated(string $key, string $value):void{//key é o name do input e value o cep que vai na API
         if($key === 'data.zipcode'){
             // dd($this->data['email']);
-            $data = ViaCepService::handle($value, $this->data['email']);
-            if ($data == null){
+            $dataUser = $this->data;
+            $dataAddress = ViaCepService::handle($value);
+            if ($dataAddress == null){
                 $this->showNotification('error','CEP INVALIDO', 'Por favor informe um CEP Válido !');
             }
             else{
-                $this->data = $data;
+                $this->data = array_merge($dataUser, $dataAddress);
             }
             
 
@@ -70,15 +87,18 @@ class SearchZipcode extends Component
         
         }
         public function save():void{
-            sleep(2);
-            $this->validate();//chamando metodo de validação
+            
+            // sleep(2);
+            
+            // dd(AddressStoreAction::save($this->data));
+            // $this->validate();//chamando metodo de validação
            
             AddressStoreAction::save($this->data);
             $this->showNotification('success','Endereço criado com sucesso', 'O endereço foi criado com sucesso !');
         
             $this->render();  
             //resetando formulario inteiro
-            $this->resetExcept('addresses');
+            // $this->resetExcept('addresses');
                 // dd('salvou', $this);//pega os valores magicamente do metodo zipcode
         }
         public function render()

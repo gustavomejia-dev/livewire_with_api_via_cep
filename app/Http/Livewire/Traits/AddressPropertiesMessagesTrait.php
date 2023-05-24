@@ -7,7 +7,9 @@ namespace App\Http\Livewire\Traits;
 
 trait AddressPropertiesMessagesTrait{
     protected $messages = [//validações com menssagens
+        'data.name.required' => 'nome obrigatorio',
         'data.email.required' => 'email obrigatorio',
+        'data.password.required' => 'senha obrigatoria', 
         'data.zipcode.required' => 'o Campo CEP É obrigatório',
         'data.street.required' => 'o Campo ENdereço É obrigatório',
         'data.neighborhood.required' => 'o Campo BAIRRO É obrigatório',

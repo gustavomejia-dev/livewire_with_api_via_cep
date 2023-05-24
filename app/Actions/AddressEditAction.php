@@ -10,7 +10,9 @@ class AddressEditAction {
             
 
             return [
+                'name' => $address['name'],
                 'email' => $address['email'],
+                'celular' => $address['celular'],
                 'zipcode' => $address['zipcode'],
                 'street' => $address['street'],
                 'neighborhood' =>$address['neighborhood'],
@@ -21,8 +23,11 @@ class AddressEditAction {
     }
 
     public static function getEmptyProperties():array{
+
        return [
+            'name' => '',
             'email' =>'',
+            'celular' => '',
             'zipcode' => '',
             'street' => '',
             'neighborhood' => '',
