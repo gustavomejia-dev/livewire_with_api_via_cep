@@ -26,13 +26,14 @@ class AddressStoreAction {
             );
            
             
-        User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email'  => $data['email'],
             'celular' => $data['celular'],
             'address_id' => $address->id,
             'password' => $data['password'],
         ]);
+        
 
         
         

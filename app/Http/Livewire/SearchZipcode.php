@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Actions\AddressEditAction;
 use App\Actions\AddressStoreAction;
+
 use App\Actions\AddressSearchAction;
 use App\Http\Livewire\Traits\AddressPropertiesRulesTrait;
 use App\Http\Livewire\Traits\AddressPropertiesMessagesTrait;
@@ -41,9 +42,9 @@ class SearchZipcode extends Component
             //se tiver algo no input search ele já faz a requisição
             // dd($this->search);
             // return Address::where('zipcode', 'like', "%{$this->search}%")->paginate(5);
-            $teste =  $searchUsers = DB::table('users')->join('addresses', 'addresses.id', '=', 'users.id')->where('addresses.zipcode','like ', '%023%')->get();
-            dd($teste);
-            $searchUsers = DB::table('users')->join('addresses', 'addresses.id', '=', 'users.id')->where('addresses.zipcode', 'like', "%{$this->search}%")->paginate(2);
+            // $teste =  $searchUsers = DB::table('users')->join('addresses', 'addresses.id', '=', 'users.id')->where('addresses.zipcode','like ', '%023%')->get();
+            // dd($teste);
+            $searchUsers = DB::table('users')->join('addresses', 'addresses.id', '=', 'users.id')->where('addresses.street', 'like', "%{$this->search}%")->paginate(2);
             // dd($searchUsers);
             // dd($searchUsers);
             return $searchUsers;
@@ -71,7 +72,9 @@ class SearchZipcode extends Component
                 $this->showNotification('error','CEP INVALIDO', 'Por favor informe um CEP Válido !');
             }
             else{
+                
                 $this->data = array_merge($dataUser, $dataAddress);
+                // dd($this->data);
             }
             
 
@@ -91,8 +94,8 @@ class SearchZipcode extends Component
             // sleep(2);
             
             // dd(AddressStoreAction::save($this->data));
-            // $this->validate();//chamando metodo de validação
-           
+            $this->validate();//chamando metodo de validação
+            
             AddressStoreAction::save($this->data);
             $this->showNotification('success','Endereço criado com sucesso', 'O endereço foi criado com sucesso !');
         

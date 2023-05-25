@@ -51,11 +51,14 @@
         <x-input wire:model="search" label="Buscar rua" placeholder="Informe o nome da rua" />
     </div>
 
-    <div class = "py-3 my-8 w-1/2 container mx-auto bg-gray-200">
+    <div class = "py-3 my-8 w-1/3 container mx-auto bg-gray-200">
         {{-- <x-button wire:click="search" spinner="save" green label="Pesquisar" /> --}}
     <table class="table-auto mx-auto">
         <thead>
           <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Celular</th>
             <th>CEP</th>
             <th>Rua</th>
             <th>Bairro</th>
@@ -69,7 +72,9 @@
             @foreach ($this->address as $address)
                 
                 <tr>
-                   
+                    <td class="border px-4 py-2">{{$address->name}}</td>
+                    <td class="border px-4 py-2">{{$address->email}}</td>
+                    <td class="border px-4 py-2">{{$address->celular}}</td>
                     <td class="border px-4 py-2">{{$address->zipcode}}</td>
                     <td class="border px-4 py-2">{{$address->street}}</td>
                     <td class="border px-4 py-2">{{$address->neighborhood}}</td>
