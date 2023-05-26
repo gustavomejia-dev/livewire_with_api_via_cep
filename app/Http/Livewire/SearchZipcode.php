@@ -25,10 +25,11 @@ class SearchZipcode extends Component
 
     public array $data = [];
     // public array $addresses = [];// aonde vai vim os dados
-    
-    public string $search = '';
+    public string $searchState = '';
+    public string $searchStreet = '';
 
-    protected $queryString = ['search'];
+    public string $searchPhone = '';
+    protected $queryString = ['searchStreet', 'searchState', 'searchPhone'];
 
     public function mount():void{
         $this->data = AddressEditAction::getEmptyProperties();
@@ -38,29 +39,28 @@ class SearchZipcode extends Component
 
     //o nome do método tem que estár no singular, igual ao da model  
     public function  getAddressProperty(){//propiedades computadas para mostra todos os dados
-        if ($this->search){
-            //se tiver algo no input search ele já faz a requisição
-            // dd($this->search);
-            // return Address::where('zipcode', 'like', "%{$this->search}%")->paginate(5);
-            // $teste =  $searchUsers = DB::table('users')->join('addresses', 'addresses.id', '=', 'users.id')->where('addresses.zipcode','like ', '%023%')->get();
-            // dd($teste);
-            $searchUsers = DB::table('users')->join('addresses', 'addresses.id', '=', 'users.id')->where('addresses.street', 'like', "%{$this->search}%")->paginate(2);
-            // dd($searchUsers);
-            // dd($searchUsers);
-            return $searchUsers;
-          
-        }
-        $infoUsers = DB::table('users')
-             ->join('addresses', 'addresses.id', '=', 'users.id')
-             ->select('*')
-             ->paginate(5);
-        return $infoUsers;    
-        // dd($query);
+        
+        // if($this->searchStreet || $this->searchState || $this->searchPhone){
+            $users = User::join('addresses', 'addresses.id', '=', 'users.id');
+            if($this->searchStreet){
+                $users->where('addresses.street','LIKE', "%{$this->searchStreet}%");
+                }
+            if($this->searchState){
+                $users->where('addresses.state', $this->searchState);
+            }    
 
-        // $address = Address::paginate(5);
-        // return $address;
+            if ($this->searchPhone){
+                $users->where('users.celular','LIKE', "%{$this->searchPhone}%");
+            }
+      
+            return $users->paginate(5);
+        
   
     }
+
+    // getStateProperty
+
+
     
     //metodo magico para fazer requisição após sair do input    
     public function updated(string $key, string $value):void{//key é o name do input e value o cep que vai na API
@@ -128,6 +128,8 @@ class SearchZipcode extends Component
                 $message, 
             );
         }
+
+     
 
    
     

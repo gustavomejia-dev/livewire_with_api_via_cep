@@ -47,10 +47,24 @@
         
     </div>
 
-    <div class =  "mt-3 mx-auto container w-1/2">
-        <x-input wire:model="search" label="Buscar rua" placeholder="Informe o nome da rua" />
-    </div>
-
+    <section class = "bg-slate-500 w-1/3 mx-auto rounded-md">
+        <div class =  "mt-3 mx-auto container w-1/2">
+            <x-input wire:model.defer="searchStreet" label="Buscar rua" placeholder="Informe o nome da rua" />
+        </div>
+        <div class =  "mt-3 mx-auto container w-1/2">
+            <x-input wire:model.defer="searchPhone" label="Buscar Celular" placeholder="Informe o celular" />
+        </div>
+        <div class = "mx-auto mt-3 text-center">
+            <label for="state">Busque por Estado:</label>
+            <select wire:model.defer = 'searchState' id="state">
+                <option value="">...</option>
+                @foreach ($this->address as $address)
+                <option value="{{$address->state}}">{{$address->state}}</option>
+                @endforeach
+            </select>
+            <x-button wire:click="getAddressProperty" spinner="getAddressProperty" green label="Buscar" />
+        </div>
+    </section>
     <div class = "py-3 my-8 w-1/3 container mx-auto bg-gray-200">
         {{-- <x-button wire:click="search" spinner="save" green label="Pesquisar" /> --}}
     <table class="table-auto mx-auto">
