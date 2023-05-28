@@ -33,7 +33,7 @@
         </div>
         <div class = 'mt-3'>
             <x-button wire:click="save" spinner="save" green label="Cadastrar" />
-            <x-button wire:click="save" spinner="reset" dark label="Limpar" />
+            
             
         </div>
      
@@ -56,13 +56,14 @@
         </div>
         <div class = "mx-auto mt-3 text-center">
             <label for="state">Busque por Estado:</label>
-            <select wire:model.defer = 'searchState' id="state">
-                <option value="">...</option>
-                @foreach ($this->address as $address)
-                <option value="{{$address->state}}">{{$address->state}}</option>
+            <select wire:model.defer = 'searchState' id="state"> 
+                 <option value = "*">Todos</option>
+                @foreach ($this->state as $state)
+                    <option value="{{$state->state}}">{{$state->state}}</option>
                 @endforeach
             </select>
             <x-button wire:click="getAddressProperty" spinner="getAddressProperty" green label="Buscar" />
+            <x-button wire:click="toClean" dark label="Limpar Filtro" />
         </div>
     </section>
     <div class = "py-3 my-8 w-1/3 container mx-auto bg-gray-200">

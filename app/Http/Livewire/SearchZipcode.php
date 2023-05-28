@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use App\Actions\AddressEditAction;
 use App\Actions\AddressStoreAction;
 
-use App\Actions\AddressSearchAction;
+
 use App\Http\Livewire\Traits\AddressPropertiesRulesTrait;
 use App\Http\Livewire\Traits\AddressPropertiesMessagesTrait;
 use Livewire\Component;
@@ -13,6 +13,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Address;
+use App\Models\State;
 use App\Models\User;
 use WireUi\Traits\Actions;
 use App\Services\ViaCepService;
@@ -33,32 +34,49 @@ class SearchZipcode extends Component
 
     public function mount():void{
         $this->data = AddressEditAction::getEmptyProperties();
-        
+       
          
       }
 
     //o nome do método tem que estár no singular, igual ao da model  
-    public function  getAddressProperty(){//propiedades computadas para mostra todos os dados
+
+    //   public function getStateProperty(){
+    //     State::all();
+    //   }
+
+    public function getStateProperty(){
+        
+        $states = State::all()->unique('state');
+        // dd($states['SP']);
+        return $states;
+        
+    }
+    public function getAddressProperty(){//propiedades computadas para mostra todos os dados
+        
         
         // if($this->searchStreet || $this->searchState || $this->searchPhone){
-            $users = User::join('addresses', 'addresses.id', '=', 'users.id');
+            $users = User::join('addresses', 'addresses.id', '=', 'users.id')->join('states', 'states.id', '=', 'users.id');
+            // if($this->searchState === '*'){
+            //     $users = User::join('addresses', 'addresses.id', '=', 'users.id')->join('states', 'states.id', '=', 'users.id');
+            // }   
+        
             if($this->searchStreet){
-                $users->where('addresses.street','LIKE', "%{$this->searchStreet}%");
+                    $users->where('addresses.street','LIKE', "%{$this->searchStreet}%");
                 }
-            if($this->searchState){
-                $users->where('addresses.state', $this->searchState);
+            if($this->searchState != "*"){
+                $users->where('states.state', $this->searchState);
             }    
 
             if ($this->searchPhone){
                 $users->where('users.celular','LIKE', "%{$this->searchPhone}%");
             }
-      
-            return $users->paginate(5);
+
+            return $users->orderBy('states.state')->paginate(5);
         
   
     }
 
-    // getStateProperty
+   
 
 
     
@@ -89,6 +107,15 @@ class SearchZipcode extends Component
        
         
         }
+        public function toClean():void{
+            
+            $this->searchPhone = ''; 
+            $this->searchStreet = '' ;
+            $this->searchState = '*'; 
+            // $this->resetExcept('data');
+            
+            
+        }
         public function save():void{
             
             // sleep(2);
@@ -96,14 +123,16 @@ class SearchZipcode extends Component
             // dd(AddressStoreAction::save($this->data));
             $this->validate();//chamando metodo de validação
             
-            AddressStoreAction::save($this->data);
+           AddressStoreAction::save($this->data);
             $this->showNotification('success','Endereço criado com sucesso', 'O endereço foi criado com sucesso !');
         
             $this->render();  
             //resetando formulario inteiro
-            // $this->resetExcept('addresses');
+            $this->resetExcept('searchPhone', 'searchState', 'searchStreet');
                 // dd('salvou', $this);//pega os valores magicamente do metodo zipcode
         }
+
+   
         public function render()
         {
             // $this->addresses = Address::all()->toArray(); //Carrega todos os dados 

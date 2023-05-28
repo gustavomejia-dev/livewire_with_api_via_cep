@@ -13,6 +13,6 @@ class Address extends Model
             'street',
             'neighborhood',
             'city',
-            'state',
+            
     ];
 }

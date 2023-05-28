@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'celular',
         'address_id' ,
+        'state_id',
         'password',
     ];
 
@@ -49,6 +50,11 @@ class User extends Authenticatable
     public function address(): HasOne
     {
         return $this->hasOne(Address::class,'foreign_key');
+    }
+
+    public function state(): HasOne
+    {
+        return $this->hasOne(State::class,'foreign_key');
     }
 
 }
