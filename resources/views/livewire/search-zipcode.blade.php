@@ -47,7 +47,7 @@
         
     </div>
 
-    <section class = "bg-slate-500 w-1/3 mx-auto rounded-md">
+    <section class = "bg-blue-100 w-1/2 mx-auto rounded-md">
         <div class =  "mt-3 mx-auto container w-1/2">
             <x-input wire:model.defer="searchStreet" label="Buscar rua" placeholder="Informe o nome da rua" />
         </div>
@@ -71,15 +71,15 @@
     <table class="table-auto mx-auto">
         <thead>
           <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Celular</th>
-            <th>CEP</th>
-            <th>Rua</th>
-            <th>Bairro</th>
-            <th>Cidade</th>
-            <th>Estado</th>
-            <th>Ações</th>
+            <th class = "px-4">Nome</th>
+            <th class = "px-4" >Email</th>
+            <th class = "px-4" >Celular</th>
+            <th class = "px-4">CEP</th>
+            <th class = "px-4">Rua</th>
+            <th class = "px-4">Bairro</th>
+            <th class = "px-4">Cidade</th>
+            <th class = "px-4">Estado</th>
+            <th class = "px-4">Ações</th>
           
           </tr>
         </thead>
