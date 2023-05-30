@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SidebarController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Livewire\SearchZipcode;
 /*
@@ -14,3 +15,4 @@ use \App\Http\Livewire\SearchZipcode;
 */
 
 Route::get('/',SearchZipcode::class)->name('search-zipcode');
+

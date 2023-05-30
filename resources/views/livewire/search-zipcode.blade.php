@@ -1,4 +1,4 @@
-
+<x-sidebar text="o texto do alerta" message="suco"/>
 <div class="">
     <x-notifications />
     <h1 class="text-center">Informações para Entrega</h1>
