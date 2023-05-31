@@ -1,24 +1,18 @@
 
    <div x-data="{ open: false }">
-      <button @click="open = ! open">HAMBURG</button>
-   
-      <div x-show="open" @click.outside="open = false">
-         <div>
-            <div class="w-96 bg-black"></div>
-         <div class="w-80 bg-red></div>
-         {{-- <aside class="h-screen px-2 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700"> --}}
-            
-            
-            {{-- <div class="w-16 justify-between mt-6">
-                <nav class="bg-blue-100 w-16">
-                  
-
+      <button @click="open = ! open" >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+      <div class = "h-0 w-0" x-show="open" @click.outside="open = false">
+            <div class="justify-between mt-6">
+                <nav class="bg-blue-100 w-40">
                     <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
                         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-
                         <span class="mx-4 font-medium">Login</span>
                     </a>
         
@@ -40,10 +34,8 @@
                     </a>
                 </nav>
             </div>
-        </aside>
-
 
       </div>
-  </div> --}}
+
     
 </div>

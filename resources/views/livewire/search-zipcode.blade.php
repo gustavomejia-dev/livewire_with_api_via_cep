@@ -13,7 +13,8 @@
             <x-input wire:model.defer="data.celular" label="Celular" placeholder="Celular" />
         </div>
         <div class="flex flex-col w-1/2">
-            <x-input wire:model.defer="data.password" label="Senha" placeholder="Senha" />
+            {{-- <x-input wire:model.defer="data.password" label="Senha" placeholder="Senha" /> --}}
+            <x-inputs.password wire:model.defer="data.password" label="Senha" placeholder="Senha"/>
         </div>
         
         <div class="flex flex-col w-1/2">
