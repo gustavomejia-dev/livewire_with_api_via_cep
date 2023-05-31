@@ -15,4 +15,4 @@ use \App\Http\Livewire\SearchZipcode;
 */
 
 Route::get('/',SearchZipcode::class)->name('search-zipcode');
-
+// Route::get('/sistema/ticket', )
