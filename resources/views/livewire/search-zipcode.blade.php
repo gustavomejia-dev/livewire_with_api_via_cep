@@ -1,3 +1,4 @@
+<div>
 <x-sidebar text="o texto do alerta" message="suco"/>
 <div class="">
     <x-notifications />
@@ -67,20 +68,20 @@
             <x-button wire:click="toClean" dark label="Limpar Filtro" />
         </div>
     </section>
-    <div class = "py-3 my-8 w-1/3 container mx-auto bg-gray-200">
+    <div class = "py-3 my-8 w-1/2 container mx-auto bg-gray-200">
         {{-- <x-button wire:click="search" spinner="save" green label="Pesquisar" /> --}}
-    <table class="table-auto mx-auto">
+    <table class="table-auto mx-auto w-1/2">
         <thead>
           <tr>
-            <th class = "px-4">Nome</th>
-            <th class = "px-4" >Email</th>
-            <th class = "px-4" >Celular</th>
-            <th class = "px-4">CEP</th>
-            <th class = "px-4">Rua</th>
-            <th class = "px-4">Bairro</th>
-            <th class = "px-4">Cidade</th>
-            <th class = "px-4">Estado</th>
-            <th class = "px-4">Ações</th>
+            <th class = "px-2">Nome</th>
+            <th class = "px-2" >Email</th>
+            <th class = "px-2" >Celular</th>
+            <th class = "px-2">CEP</th>
+            <th class = "px-2">Rua</th>
+            <th class = "px-2">Bairro</th>
+            <th class = "px-2">Cidade</th>
+            <th class = "px-2">Estado</th>
+            <th class = "px-2">Ações</th>
           
           </tr>
         </thead>
@@ -112,3 +113,4 @@
     </div>
 </div>
 
+</div>
