@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->enum('status',['R', 'P', 'A']);
+            $table->string('texto');
+            $table->string('email')->unique();
+            $table->string('nome_remetente');
             $table->timestamps();
         });
     }

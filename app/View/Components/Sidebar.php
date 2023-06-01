@@ -11,12 +11,11 @@ class Sidebar extends Component
     /**
      * Create a new component instance.
      */
-    public $text;
-    public $message;
-    public function __construct($text = '', $message = '')
+   
+    
+    public function __construct()
     {
-        $this->text = $text;
-        $this->message = $message;
+        
         
         
      
