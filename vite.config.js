@@ -8,6 +8,7 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    ///configurar para atualizar automaticamente a pagina conforme as mudanças
     server: {
         host: '0.0.0.0',
         hmr: {

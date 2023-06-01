@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SidebarController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Livewire\SearchZipcode;
 /*
@@ -15,4 +16,4 @@ use \App\Http\Livewire\SearchZipcode;
 */
 
 Route::get('/',SearchZipcode::class)->name('search-zipcode');
-// Route::get('/sistema/ticket', )
+Route::get('/sistema/ticket',[TicketController::class, 'index'])->name('ticket');
