@@ -1,13 +1,25 @@
 <?php
 namespace App\Http\Traits;
 
+use Illuminate\Http\Request;
+
 
 trait TicketPropertiesMessagesTrait{
- 
-    protected static function rules (array $data){
-        
-    }
+    
+    
+    
+    public static function messages ($data){
+            
+            return
+                [
+                 'data.email.required' => 'Email obrigatorio',
+                ];
+            
+            
 
+            
+    }
+        
 }
 
 

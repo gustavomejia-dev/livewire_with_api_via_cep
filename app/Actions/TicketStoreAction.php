@@ -9,12 +9,13 @@ class TicketStoreAction{
 
     public static function save (array $data){
         
-        $tickets = Ticket::updateOrCreate(
+        $ticket = Ticket::updateOrCreate(
             [
                 'email' => $data['email'],
-            ],[
+            ],
+            [
                 'status' => $data['status'],
-                'texto' => $data['text'],
+                'texto' => $data['texto'],
                 'nome_remetente' => $data['nome_remetente'],
             ]
 

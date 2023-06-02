@@ -2,40 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\TicketStoreAction;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use App\Actions\TicketStoreAction;
+use App\Http\Requests\StoreTicketRequest;
+use \App\Http\Traits\TicketPropertiesMessagesTrait;
 
 class TicketController extends Controller
 {   
-    /**
-     * Display a listing of the resource.
-     */
+   
+
+    public array $data = [];
+
     public function index()
     {   $tickets = Ticket::all();
-        return view('tickets', compact('tickets'));
+        return view('tickets.tickets', compact('tickets'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+   
     public function create()
     {
-        //
+        
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {   
-        
-        TicketStoreAction::save($request->all());
+
+
+
+     public function store(StoreTicketRequest $request)
+    {  
+        $validated = $request->validated();
+        TicketStoreAction::save($validated);
+        return back();    
     }
 
     /**
      * Display the specified resource.
      */
+
+     public function list (){
+
+        $tickets = Ticket::all();
+        return view('tickets.list-tickets', compact('tickets'));
+     }
     public function show(string $id)
     {
         //
