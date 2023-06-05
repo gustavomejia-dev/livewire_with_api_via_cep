@@ -19,3 +19,5 @@ Route::get('/',SearchZipcode::class)->name('search-zipcode');
 Route::get('/sistema/tickets',[TicketController::class, 'index'])->name('ticket');
 Route::post('/sistema/create/ticket', [TicketController::class, 'store'])->name('createTicket');
 Route::get('/sistema/show/ticket', [TicketController::class,'list'])->name('showTickets');
+Route::get('sistema/edit/ticket/{id?}', [TicketController::class, 'edit'])->name('editTicket');
+Route::post('sistema/update/ticket', [TicketController::class, 'update'])->name('updateTicket');

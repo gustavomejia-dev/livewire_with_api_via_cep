@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use App\Actions\TicketStoreAction;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreTicketRequest;
 use \App\Http\Traits\TicketPropertiesMessagesTrait;
 
@@ -56,16 +57,24 @@ class TicketController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        //
+    {   
+        $ticket = Ticket::find($id);
+        return $ticket->toJson();
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update(Request $request)
+        
+    {   
+        DB::table('tickets')->update([
+            'status' => $request->status,
+            'texto' => $request->texto,
+            'email'=> $request->email,
+            'nome_remetente' => $request->nome_remetente
+            
+        ]);
     }
 
     /**
