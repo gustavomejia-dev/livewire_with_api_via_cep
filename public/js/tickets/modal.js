@@ -3,8 +3,9 @@
 
 //TOKEN 
 const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
-// função que abre a modal abre a modal 
+// função que abre a modal 
 function openModal(id) {
+    document.getElementById('inputId').value = id;
     fetch('http://aprendendolaravel.sis/sistema/edit/ticket/'+id, {
         method: 'get',
         headers: {

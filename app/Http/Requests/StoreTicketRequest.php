@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTicketRequest extends FormRequest
@@ -28,10 +30,8 @@ class StoreTicketRequest extends FormRequest
             'nome_remetente' => 'required',
             
             
-            
-            
-
         ];
+        
     }
 
     public function messages(){

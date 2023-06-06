@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Actions\TicketStoreAction;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreTicketRequest;
+use App\Http\Requests\UpdateTicketRequest;
 use \App\Http\Traits\TicketPropertiesMessagesTrait;
 
 class TicketController extends Controller
@@ -45,7 +46,7 @@ class TicketController extends Controller
 
      public function list (){
 
-        $tickets = Ticket::all();
+        $tickets = Ticket::paginate(5);
         return view('tickets.list-tickets', compact('tickets'));
      }
     public function show(string $id)
@@ -65,16 +66,18 @@ class TicketController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(UpdateTicketRequest $request)
         
     {   
-        DB::table('tickets')->update([
-            'status' => $request->status,
-            'texto' => $request->texto,
-            'email'=> $request->email,
-            'nome_remetente' => $request->nome_remetente
-            
+        // dd($request);
+        Ticket::where('id','=', $request->id)->update([
+            'status'        =>  $request->status,
+            'texto'         =>  $request->texto,
+            'email'         => $request->email,
+            'nome_remetente'=> $request->nome_remetente    
         ]);
+        
+        return back();
     }
 
     /**
