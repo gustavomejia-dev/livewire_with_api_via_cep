@@ -11,6 +11,7 @@ class Ticket extends Model
 
     protected $fillable = [
         'status',
+        'assunto',
         'texto',
         'email',
         'nome_remetente'

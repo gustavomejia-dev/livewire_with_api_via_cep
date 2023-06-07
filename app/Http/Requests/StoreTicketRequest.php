@@ -25,6 +25,7 @@ class StoreTicketRequest extends FormRequest
     {
         return [
             'status' => 'required|',
+            'assunto' => 'required',
             'texto' => 'required|max:255',
             'email' => 'required|email|max:255',
             'nome_remetente' => 'required',

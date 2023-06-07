@@ -34,8 +34,9 @@ class TicketController extends Controller
 
 
      public function store(StoreTicketRequest $request)
-    {  
+    {   
         $validated = $request->validated();
+        // dd($validated);
         TicketStoreAction::save($validated);
         return back();    
     }
