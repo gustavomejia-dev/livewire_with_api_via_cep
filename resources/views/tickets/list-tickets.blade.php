@@ -15,6 +15,15 @@
                 <x-sidebar/> 
             </div>
 
+
+
+            {{-- FILTROS --}}
+            <div class="bg-slate-100 mx-24 h-[80px] w-full">
+                AQUI FICARA OS FILTROS
+            </div>
+
+
+            {{-- FIM DOS FILTROS --}}
             <section class="flex-row h-screen justify-center items-center ml-[10%]">
                 @foreach ($tickets as $ticket)
                 {{-- aqui está carregando os chamados com um link para mandar para uma modal referente ao ticket --}}

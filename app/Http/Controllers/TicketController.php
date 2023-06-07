@@ -45,8 +45,8 @@ class TicketController extends Controller
      */
 
      public function list (){
-
         $tickets = Ticket::paginate(5);
+  
         return view('tickets.list-tickets', compact('tickets'));
      }
     public function show(string $id)

@@ -30,6 +30,6 @@ class UpdateTicketRequest extends FormRequest
     {
         return [
             'email.unique' => 'Usuario esse email já existe'
-        ]
+        ];
     }
 }
