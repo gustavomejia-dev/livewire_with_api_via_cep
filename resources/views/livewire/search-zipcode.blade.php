@@ -1,5 +1,5 @@
 <div>
-<x-sidebar text="o texto do alerta" message="suco"/>
+    <x-sidebar/>
 <div class="">
     <x-notifications />
     <h1 class="text-center">Informações para Entrega</h1>
