@@ -67,10 +67,11 @@ class TicketController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTicketRequest $request)
+    public function update(Request $request)
         
     {   
-        // dd($request);
+        
+        
         Ticket::where('id','=', $request->id)->update([
             'status'        =>  $request->status,
             'texto'         =>  $request->texto,

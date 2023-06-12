@@ -3,22 +3,26 @@
 namespace App\Http\Livewire;
 
 use App\Models\Ticket;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 
 class SearchTicket extends Component
 {
 
     public string $searchTicket = '';
+    public array $data = [];
 
     protected $queryString = ['searchTicket'];
 
 
     public function mount(){
-        $this->searchTicket = 'TESTE';
+        $this->data = Ticket::all()->toArray();
+        // dd($this->data);
+        // $this->searchTicket = 'TESTE';
 
     }
-    public function getTicketProperty(){
-        dd($this->searchTicket);
+    public function getTicketProperty():Collection{
+        return Ticket::all();
     }
     public function render()
     {   

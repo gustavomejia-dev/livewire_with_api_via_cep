@@ -9,7 +9,11 @@
               </div>
               {{-- Buscando Apenas por titulo --}}
               <input wire:model.lazy="searchTicket" type="text" placeholder="Pesquise pelo Assunto" class="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-                
+                 @foreach ($this->ticket as $t){
+                    <h1>{{ $t }}</h1>
+                 }
+                     
+                 @endforeach
                  
                 </div>
                   
