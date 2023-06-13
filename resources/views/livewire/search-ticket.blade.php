@@ -1,4 +1,5 @@
 <div>
+  {{-- COMPONENTE DE BUSCA NO BANCO DE DADOS --}}
     <div class="bg-slate-100 m-12 h-[500px] w-auto mx-4 ">
         <div class="w-full md:w-2/3 shadow p-5 rounded-lg bg-white">
             <div class="relative">
@@ -8,46 +9,34 @@
                 </svg>
               </div>
               {{-- Buscando Apenas por titulo --}}
-              <input wire:model.lazy="searchTicket" type="text" placeholder="Pesquise pelo Assunto" class="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-                 @foreach ($this->ticket as $t){
-                    <h1>{{ $t }}</h1>
-                 }
-                     
-                 @endforeach
-                 
+              <input wire:model="searchTicket" type="text" placeholder="Pesquise pelo Assunto" class="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"> 
                 </div>
                   
               <div class="flex items-center justify-between mt-4">
                 <p class="font-medium">
                   FIltros
                 </p>
-          
-                <button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md">
-                  Limpar FIltros
-                </button>
               </div>
           
               <div>
                 <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
-                  <select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-                    <option value="">All Type</option>
+                  <select wire:model.defer = "searchAll" class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+                    <option value="*" selected>All Type</option>
                     <option value="for-rent">For Rent</option>
                     <option value="for-sale">For Sale</option>
                   </select>
-          
-                  <select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-                    <option value="">Furnish Type</option>
-                    <option value="fully-furnished">Fully Furnished</option>
-                    <option value="partially-furnished">Partially Furnished</option>
-                    <option value="not-furnished">Not Furnished</option>
-                  </select>
-          
-                  <select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-                    <option value="">Any Price</option>
-                    <option value="1000">RM 1000</option>
-                    <option value="2000">RM 2000</option>
-                    <option value="3000">RM 3000</option>
-                    <option value="4000">RM 4000</option>
-                  </select>
-    </div>
+                  
+                 
+            </div>
+            {{-- buttons --}}
+            <div class="my-3">
+              <button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md">
+                Limpar FIltros
+              </button>
+
+              <button wire:click="getTicketsProperty()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md">
+                Buscar
+              </button>
+          </div>
+    {{-- FIM DO COMPONENTE DE BUSCA --}}
 </div>

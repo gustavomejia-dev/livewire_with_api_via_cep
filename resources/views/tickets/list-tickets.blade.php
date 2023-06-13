@@ -108,7 +108,7 @@
                             
 
                             <div class="w-[90%]">
-                        
+
                             <label for="comment" class="px-2 sr-only">Detalhes</label>
                             <textarea value = "" id="comment" name="texto" rows="4" class="w-[90%] rounded-lg px-2 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Descreva o problema" ></textarea>
                     
