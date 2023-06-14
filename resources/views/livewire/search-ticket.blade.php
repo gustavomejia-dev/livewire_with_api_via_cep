@@ -38,5 +38,7 @@
                 Buscar
               </button>
           </div>
+          {{-- fim dos buttons --}}
     {{-- FIM DO COMPONENTE DE BUSCA --}}
-</div>
+   
+  </div>

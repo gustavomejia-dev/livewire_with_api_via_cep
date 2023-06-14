@@ -18,32 +18,13 @@ class SearchTicket extends Component
 
 
     public function mount(){
-        $this->getTicketsProperty();
+
         // $this->data = Ticket::all()->toArray();
         
 
     }
-    public function getTicketsProperty(){
-        $tickets = new Ticket;
 
-        if ($this->searchAll === '*'){
-            $this->list();
-        
-        if($this->searchAll){
-            dd($this->searchAll);
-        }    
-            
-        }
-    
-       
-        
-        
-    }
    
-    public function list(){
-        $tickets = Ticket::paginate(5);
-        return view('tickets.list-tickets', compact('tickets'));
-    }
 
     public function render()
     {   

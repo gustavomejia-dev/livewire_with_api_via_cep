@@ -10,7 +10,7 @@
     @livewireStyles
 </head>
 <body x-data = "{'showModal' : false }" @keydown.escape="showModal = false" class="bg-slate-00">
-    <main class="flex flex-row bg-state-300">
+    <main x-data = "{'showModal' : false }" @keydown.escape="showModal = false" class="bg-slate-00" class="flex flex-row bg-state-300">
             <div> 
                 <x-sidebar/> 
             </div>

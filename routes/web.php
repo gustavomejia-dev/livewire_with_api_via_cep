@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SidebarController;
 use App\Http\Controllers\TicketController;
+use App\Http\Livewire\ListandoTickets;
 use App\Http\Livewire\SearchTicket;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Livewire\SearchZipcode;
@@ -17,7 +18,7 @@ use \App\Http\Livewire\SearchZipcode;
 */
 
 Route::get('/',SearchZipcode::class)->name('search-zipcode');
-Route::get('/sistema/show/ticket', [SearchTicket::class, 'list'])->name('showTickets');
+Route::get('/sistema/show/ticket', ListandoTickets::class)->name('showTickets');
 Route::get('/sistema/tickets',[TicketController::class, 'index'])->name('ticket');
 Route::post('/sistema/create/ticket', [TicketController::class, 'store'])->name('createTicket');
 // Route::get('/sistema/show/ticket', [TicketController::class,'list'])->name('showTickets');
