@@ -9,19 +9,15 @@ use Livewire\Component;
 class SearchTicket extends Component
 {
 
-    public string $searchTicket = '';
+  
 
-    public string $searchAll = '';
-    public array $data = [];
-
-    protected $queryString = ['searchTicket', 'searchAll'];
+   
 
 
     public function mount(){
+      
 
-        // $this->data = Ticket::all()->toArray();
-        
-
+        // $this->data = Ticket::all()->toArray()
     }
 
    
