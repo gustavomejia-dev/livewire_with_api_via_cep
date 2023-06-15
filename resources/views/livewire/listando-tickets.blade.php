@@ -1,15 +1,15 @@
 
-<main x-data = "{'showModal' : false }" @keydown.escape="showModal = false" class="bg-slate-00" class="flex flex-row bg-state-300">
+<main x-data = "{'showModal' : false }" @keydown.escape="showModal = false" class="bg-slate-00 flex flex-row bg-state-300" >
     
     <div> 
         <x-sidebar/> 
     </div>
     
-    <section class="flex-row h-screen justify-center items-center ml-[10%]">
+    <section class="mt-[5%] flex-row h-screen justify-center items-center ml-[10%]">
          {{-- aqui está carregando os chamados com um link para mandar para uma modal referente ao ticket --}}
             {{-- FILTROS --}}
            
-            <div class="w-full md:w-2/3 shadow p-5 rounded-lg bg-white">
+            <div class="w-[600px] shadow p-5 rounded-lg bg-white">
                 <div class="relative">
                   <div class="absolute flex items-center ml-2 h-full">
                     <svg class="w-4 h-4 fill-current text-primary-gray-dark" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,7 +24,7 @@
             {{-- FIM DOS FILTROS --}}
                 
             {{-- Ordena pelo status do ticket --}}
-            <div>
+            <div class>
                 <h1 class="mt-6">Status</h1>
                 <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-2">
                     
