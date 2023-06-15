@@ -20,11 +20,23 @@
                   <input wire:model.debounce.500ms="searchTicket" type="text" placeholder="Pesquise pelo Assunto" class="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"> 
                     </div>
                     {{-- BOTÃO PARA EFETUAR A BUSCA NO BANCO --}}
-                <button wire:click="getTicketsProperty" class=" my-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md">
-                    Buscar
-                </button>
                 {{-- FIM DO BOTAO DE BUSCA --}}
             {{-- FIM DOS FILTROS --}}
+                
+            {{-- Ordena pelo status do ticket --}}
+            <div>
+                <h1 class="mt-6">Status</h1>
+                <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-2">
+                    
+                    
+                    <select wire:model.lazy = "searchTicketStatus" class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+                    <option value="*" selected>Todos</option>
+                    <option value="R">Resolvido</option>
+                    <option value="P">Pendente</option>
+                    <option value="A">Aberto</option>
+                  </select>  
+            </div>
+            {{-- fim da ordenação dos status do ticket --}}
         @foreach ($this->tickets as $ticket)
         {{-- aqui está carregando os chamados com um link para mandar para uma modal referente ao ticket --}}
             <div class= "cursor-pointer w-[500px] max-lg:" onclick = openModal({{$ticket->id}})>

@@ -18,18 +18,19 @@
                 </p>
               </div>
           
-              <div>
+              <div class="mx-6">
                 <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
                   <select wire:model.defer = "searchAll" class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
                     <option value="*" selected>All Type</option>
-                    <option value="for-rent">For Rent</option>
-                    <option value="for-sale">For Sale</option>
+                    <option value="for-rent">Resolvido</option>
+                    <option value="for-sale">Pendente</option>
+                    <option value="for-sale">Aberto</option>
                   </select>
-                  
+              </div>    
                  
             </div>
             {{-- buttons --}}
-            <div class="my-3">
+            <div class="">
               <button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md">
                 Limpar FIltros
               </button>

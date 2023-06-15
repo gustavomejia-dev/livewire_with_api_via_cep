@@ -11,10 +11,10 @@ class ListandoTickets extends Component
 {   
     public string $searchTicket = '';
 
-    public string $searchAll = '';
+    public string $searchTicketStatus = '*';
     public array $data = [];
 
-    protected $queryString = ['searchTicket', 'searchAll'];
+    protected $queryString = ['searchTicket', 'searchTicketStatus'];
 
     public function mount(){
         
@@ -24,8 +24,12 @@ class ListandoTickets extends Component
     public function getTicketsProperty(){
         $tickets  = Ticket::select('*');
         if($this->searchTicket){
-            $tickets = Ticket::where('assunto', 'LIKE', "%{$this->searchTicket}%");
+
+            $tickets->where('assunto', 'LIKE', "%{$this->searchTicket}%");
             
+        }
+        if($this->searchTicketStatus != "*"){
+            $tickets->where('status', '=', "{$this->searchTicketStatus}");
         }
 
         return $tickets->orderBy('created_at')->get();//aqui é paginate
