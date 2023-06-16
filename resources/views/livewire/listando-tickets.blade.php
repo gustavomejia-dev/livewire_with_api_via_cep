@@ -8,8 +8,7 @@
     <section class="mt-[5%] flex-row h-screen justify-center items-center ml-[10%]">
          {{-- aqui está carregando os chamados com um link para mandar para uma modal referente ao ticket --}}
             {{-- FILTROS --}}
-           
-            <div class="w-[600px] shadow p-5 rounded-lg bg-white">
+            <div class="w-[1400px] bg-slate-200 min-w-[1200px] marker:shadow p-5 rounded-lg">
                 <div class="relative">
                   <div class="absolute flex items-center ml-2 h-full">
                     <svg class="w-4 h-4 fill-current text-primary-gray-dark" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,19 +23,31 @@
             {{-- FIM DOS FILTROS --}}
                 
             {{-- Ordena pelo status do ticket --}}
-            <div class>
-                <h1 class="mt-6">Status</h1>
-                <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-2">
-                    
-                    
+            <div class= "w-1/2 flex px-4 mb-14 mt-8">
+                
+                <div class="relative mr-24">
+                    <label for="">Status</label>
                     <select wire:model.lazy = "searchTicketStatus" class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-                    <option value="*" selected>Todos</option>
-                    <option value="R">Resolvido</option>
-                    <option value="P">Pendente</option>
-                    <option value="A">Aberto</option>
-                  </select>  
+                        <option value="*" selected>Todos</option>
+                        <option value="R">Resolvido</option>
+                        <option value="P">Pendente</option>
+                        <option value="A">Aberto</option>
+                  </select> 
+                </div>
+                <div class="relative">
+                  <label for="">Usuarios</label>   
+                  <select wire:model.lazy = "searchName" class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+                        <option value="*" selected>Todos</option>
+                        @foreach ($this->names as $name)
+                            <option value={{$name->nome_remetente}}>{{$name->nome_remetente}}</option>
+                        @endforeach
+                    
+                </select>  
             </div>
+        </div>
             {{-- fim da ordenação dos status do ticket --}}
+            {{-- Busca por Usuario --}}
+            {{-- FIM do Busca por Usuario --}}
         @foreach ($this->tickets as $ticket)
         {{-- aqui está carregando os chamados com um link para mandar para uma modal referente ao ticket --}}
             <div class= "cursor-pointer w-[500px] max-lg:" onclick = openModal({{$ticket->id}})>
@@ -99,10 +110,9 @@
             </div>
         </div> --}}
     </section>  
-    
+
     {{-- MODAL AONDE CARREGA OS DADOS --}}
         <x-modal-when-selected-ticket/>
-
     {{-- FIM DA MODAL AONDE CARREGA OS DADOS --}}
 
 </main>  

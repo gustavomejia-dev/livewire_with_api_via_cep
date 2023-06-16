@@ -13,13 +13,20 @@
     <div> 
         <x-sidebar/> 
     </div>
+
+    {{-- caso o usuario seja cadastrado com sucesso será exibida essa div --}}
+    @if(session('success'))
+        {{-- <div x-data="{show: true}" x-show="show" x-init="setTimeout(() => show = false, 3000)" class="w-[350px]">
+            <x-alert title="Ticket Criado com Sucesso" message="Ticket criado com sucesso, caso queira procurar é só ir no meno e na opção listar Tickets" />
+        </div>   --}}
+    {{-- FIM DA DIV DE USUARIO CADASTRADO COM SUCESSO --}}
+        @endif
     <div class="flex h-screen justify-center items-center">
     <section class="w-1/2 align-middle rounded-md border-secondary-600 border py-3 px-3">
         <h2 class="text-center">Abra um Ticket</h2>
         {{-- FORM RESPONSAVEL POR CRIAR UM TICKET --}}
     <form action="{{route('createTicket')}}" method="post">
         @csrf
-        @method('post')
         <div class="relative z-0 w-full mb-6 group">
             <input type="text" value = "{{old ('email')}}" name="email" id="floating_email" class="block py-2.5 px-0 w-1/2 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
             <label for="email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email</label>
@@ -51,8 +58,7 @@
                             <span class="text-sm text-rose-600">{{$errors->first('texto')}}</span>
                         @endif
             </div>
-
-          </div>
+        </div>
             <div class="w-1/2">
                 <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
                 <select id="status" name = 'status' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -69,8 +75,9 @@
             <button type="submit" class="mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Criar Ticket</button>
         </div>
         
-      </form>
+    </form>
       {{-- FIM DO FORM PARA CRIAR TICKET --}}
+      
     </section>  
 </div>
     @livewireScripts

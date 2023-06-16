@@ -12,6 +12,8 @@ class ListandoTickets extends Component
     public string $searchTicket = '';
 
     public string $searchTicketStatus = '*';
+
+    public string $searchName = '*';
     public array $data = [];
 
     protected $queryString = ['searchTicket', 'searchTicketStatus'];
@@ -20,13 +22,21 @@ class ListandoTickets extends Component
         
         
     }
-
+    public function getNamesProperty(){
+            $names = Ticket::select('nome_remetente')->get();
+            return $names; 
+        
+    }
     public function getTicketsProperty(){
         $tickets  = Ticket::select('*');
         if($this->searchTicket){
 
             $tickets->where('assunto', 'LIKE', "%{$this->searchTicket}%");
             
+        }
+
+        if($this->searchName != "*"){
+            $tickets->where('nome_remetente', '=', "{$this->searchName}");
         }
         if($this->searchTicketStatus != "*"){
             $tickets->where('status', '=', "{$this->searchTicketStatus}");

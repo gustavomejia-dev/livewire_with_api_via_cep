@@ -13,7 +13,6 @@ use \App\Http\Traits\TicketPropertiesMessagesTrait;
 class TicketController extends Controller
 {   
    
-
     public array $data = [];
 
     public function index()
@@ -36,9 +35,14 @@ class TicketController extends Controller
      public function store(StoreTicketRequest $request)
     {   
         $validated = $request->validated();
+        if($validated){
+            // toastr()->success('Ticket Criado com sucesso');
+            TicketStoreAction::save($validated);
+            return back()->with('success', 'Sucesso');
+        }
         // dd($validated);
-        TicketStoreAction::save($validated);
-        return back();    
+        
+          
     }
 
     /**
@@ -89,4 +93,7 @@ class TicketController extends Controller
     {
         //
     }
+
+
+
 }

@@ -150,9 +150,9 @@ class SearchZipcode extends Component
             $this->data = AddressEditAction::handle($id);
             
         }
-        private function showNotification(string $method, string $title, string $message):void{
+        public function showNotification(string $method, string $title, string $message):void{
             // $this->render();
-            $this->notification()->$method(
+           $this->notification()->$method(
                 $title,
                 $message, 
             );
