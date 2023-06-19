@@ -15,7 +15,7 @@
     </div>
 
     {{-- caso o usuario seja cadastrado com sucesso será exibida essa div --}}
-    @if(session('success'))
+    @if(session('successo'))
         {{-- <div x-data="{show: true}" x-show="show" x-init="setTimeout(() => show = false, 3000)" class="w-[350px]">
             <x-alert title="Ticket Criado com Sucesso" message="Ticket criado com sucesso, caso queira procurar é só ir no meno e na opção listar Tickets" />
         </div>   --}}
@@ -38,15 +38,7 @@
             <input type="text" value = "" name="assunto" id="idAssunto" class="block py-2.5 px-0 w-1/2 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
             <label for="assunto" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Assunto</label>
         </div>
-        <div class="grid md:grid-cols-2 md:gap-6">
-          <div class="relative z-0 w-full mb-6 group">
-              <input value = "{{old ('nome_remetente')}}" type="text" name="nome_remetente" id="floating_first_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-              <label for="floating_first_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nome</label>
-              @if($errors->has('nome_remetente'))
-                    <span class="text-sm text-rose-600">{{$errors->first('nome_remetente')}}</span>
-                @endif
-            </div>
-        </div>
+        
         <div class="grid md:grid-cols-2 md:gap-6">
             
 
@@ -60,6 +52,7 @@
             </div>
         </div>
             <div class="w-1/2">
+                {{-- SELECIONE O STATUS DO TICKET --}}
                 <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
                 <select id="status" name = 'status' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     
@@ -68,10 +61,25 @@
                     <option value="P">Pendente</option>
                     <option value="A">Aberto</option>
                 </select>
+                {{-- FIM DO DO SELECIONE O STATUS DO TICKET --}}
                 @if($errors->has('status'))
                      <span class="text-sm text-rose-600">{{$errors->first('status')}}</span>
                 @endif
-            </div>
+                {{-- SELECIONE O ANALISTA/TÉCNICO --}}
+                <div class="mt-3">
+                    <label for="nome_technical" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome do Analista</label>
+                    <select id="nome_technical" name = "technical_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value = "" selected>Selecione o Analista/Técnico</option>
+                        @foreach ($technicals as $technical)
+                            <option value={{$technical->id}}>{{$technical->setor}} / {{$technical->nome}}</option>
+                        @endforeach
+                            
+                </select>                     
+                       @if($errors->has('nome'))
+                         <span class="text-sm text-rose-600">{{$errors->first('status')}}</span>
+                    @endif
+                </div>    
+                {{-- FIM DA PARTE DE SELECIONAR O ANALISTA/TECNICO --}}
             <button type="submit" class="mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Criar Ticket</button>
         </div>
         

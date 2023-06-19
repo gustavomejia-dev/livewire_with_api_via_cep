@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class TicketStoreAction{
 
-    public static function save (array $data){
+    public static function save (array $data):void{
+        
+       
         $ticket = Ticket::updateOrCreate(
             [
                 'email' => $data['email'],
@@ -16,11 +18,13 @@ class TicketStoreAction{
                 'status' => $data['status'],
                 'assunto' => $data['assunto'],
                 'texto' => $data['texto'],
-                'nome_remetente' => $data['nome_remetente'],
+                'technical_id' => $data['technical_id'],
             ]
 
 
             );
+
+            
 
     }
 

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 use \App\Http\Traits\TicketPropertiesMessagesTrait;
+use App\Models\Technical;
 
 class TicketController extends Controller
 {   
@@ -16,8 +17,10 @@ class TicketController extends Controller
     public array $data = [];
 
     public function index()
-    {   $tickets = Ticket::all();
-        return view('tickets.tickets', compact('tickets'));
+    {   
+        $tickets = Ticket::all();
+        $technicals = Technical::all();
+        return view('tickets.tickets', compact('tickets', 'technicals'));
     }
 
    
@@ -38,12 +41,13 @@ class TicketController extends Controller
         if($validated){
             // toastr()->success('Ticket Criado com sucesso');
             TicketStoreAction::save($validated);
-            return back()->with('success', 'Sucesso');
+            return back()->with('Sucesso', 'Ticket Cadastrado');
         }
         // dd($validated);
         
           
     }
+
 
     /**
      * Display the specified resource.
@@ -74,7 +78,6 @@ class TicketController extends Controller
     public function update(Request $request)
         
     {   
-        
         
         Ticket::where('id','=', $request->id)->update([
             'status'        =>  $request->status,

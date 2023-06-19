@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Technical;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +18,7 @@ return new class extends Migration
             $table->string('assunto');
             $table->string('texto');
             $table->string('email')->unique();
-            $table->string('nome_remetente');
+            $table->foreignIdFor(Technical::class);
             $table->timestamps();
         });
     }

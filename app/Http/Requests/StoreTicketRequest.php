@@ -28,7 +28,7 @@ class StoreTicketRequest extends FormRequest
             'assunto' => 'required',
             'texto' => 'required|max:255',
             'email' => 'required|email|max:255',
-            'nome_remetente' => 'required',
+            'technical_id' => 'required',
             
             
         ];
@@ -37,11 +37,11 @@ class StoreTicketRequest extends FormRequest
 
     public function messages(){
         return [
-        'email.email' => 'Digite um email correto',
         'required' => 'Campo Obrigatório',
+        'email.email' => 'Digite um email correto',
         'max' => 'Limite de Caracteres Atingido',
         'status.required' => 'Selecione Alguma das Opções',
-        'texto.required' => 'Descreva O Problema Por Favor'
+        'texto.required' => 'Descreva O Problema Por Favor',
         ];
     }
 }

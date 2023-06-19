@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Ticket;
 use Livewire\Component;
 use App\Http\Livewire\SearchTicket;
+use App\Models\Technical;
 use Illuminate\Database\Eloquent\Collection;
 
 class ListandoTickets extends Component
@@ -13,7 +14,7 @@ class ListandoTickets extends Component
 
     public string $searchTicketStatus = '*';
 
-    public string $searchName = '*';
+    public string $searchTechnical = '*';
     public array $data = [];
 
     protected $queryString = ['searchTicket', 'searchTicketStatus'];
@@ -22,27 +23,32 @@ class ListandoTickets extends Component
         
         
     }
+
+    public function getTechnicalsProperty(){
+        $technicals = Technical::all();
+        return $technicals;
+    }
     public function getNamesProperty(){
             $names = Ticket::select('nome_remetente')->get();
             return $names; 
         
     }
     public function getTicketsProperty(){
-        $tickets  = Ticket::select('*');
+        $tickets  = Ticket::join('technicals', 'technicals.id', 'tickets.id');
         if($this->searchTicket){
 
-            $tickets->where('assunto', 'LIKE', "%{$this->searchTicket}%");
+            $tickets->where('tickets.assunto', 'LIKE', "%{$this->searchTicket}%");
             
         }
 
-        if($this->searchName != "*"){
-            $tickets->where('nome_remetente', '=', "{$this->searchName}");
+        if($this->searchTechnical != "*"){
+            $tickets->where('technicals.technical_id', '=', "{$this->searchTechnical}");
         }
         if($this->searchTicketStatus != "*"){
-            $tickets->where('status', '=', "{$this->searchTicketStatus}");
+            $tickets->where('tickets.status', '=', "{$this->searchTicketStatus}");
         }
 
-        return $tickets->orderBy('created_at')->get();//aqui é paginate
+        return $tickets->orderBy('tickets.created_at')->get();//aqui é paginate
     }
     
     public function render()

@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Technical;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Ticket extends Model
 {
@@ -14,7 +16,12 @@ class Ticket extends Model
         'assunto',
         'texto',
         'email',
-        'nome_remetente'
+        'technical_id'
     ];
+
+    public function address(): HasOne
+    {
+        return $this->hasOne(Technical::class,'foreign_key');
+    }
 
 }

@@ -35,11 +35,11 @@
                   </select> 
                 </div>
                 <div class="relative">
-                  <label for="">Usuarios</label>   
-                  <select wire:model.lazy = "searchName" class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+                  <label for="">Técnico Responsável</label>   
+                  <select wire:model.lazy = "searchTechnical" class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
                         <option value="*" selected>Todos</option>
-                        @foreach ($this->names as $name)
-                            <option value={{$name->nome_remetente}}>{{$name->nome_remetente}}</option>
+                        @foreach ($this->technicals as $technical)
+                            <option value={{$technical->id}}>{{$technical->nome}}</option>
                         @endforeach
                     
                 </select>  
@@ -50,13 +50,13 @@
             {{-- FIM do Busca por Usuario --}}
         @foreach ($this->tickets as $ticket)
         {{-- aqui está carregando os chamados com um link para mandar para uma modal referente ao ticket --}}
-            <div class= "cursor-pointer w-[500px] max-lg:" onclick = openModal({{$ticket->id}})>
+            <div class= "cursor-pointer w-[100%] max-lg:" onclick = openModal({{$ticket->id}})>
                 
                 <div class="flex justify-center items-top border rounded-md border-x-slate-500 h-26 my-6">
                     
-                    <ul class="w-1/2 max-w-md divide-y divide-gray-200 dark:divide-gray-700 my-2" @click="showModal = true" >
-                        <li class="pb-3 sm:pb-4 px-2">
-                        <div class="flex items-center space-x-4">
+                    <ul class= "w-[800px] justify-center h-auto divide-y divide-gray-200 dark:divide-gray-700 my-2" @click="showModal = true" >
+                        <li class="pb-3 sm:pb-4">
+                        <div class="flex items-center space-x-12">
                         
                             <div class="flex-2">
                                 <p class="py-6 text-sm font-medium text-gray-900 truncate dark:text-white">
@@ -74,14 +74,7 @@
                                     {{$ticket->assunto}}
                                 </p>
                             </div>
-                            <div class="flex-2 min-w-0">
-                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                    {{$ticket->nome_remetente}}
-                                </p>
-                                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                    {{$ticket->email}}
-                                </p>
-                            </div>
+                        
                             <div class="flex-2">
                                 <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
                                     Status
@@ -95,6 +88,12 @@
                                         Pendente
                                     @endif
                                 </p>
+
+                                <p>Analista</p>
+                            
+                                <P class="text-sm text-gray-500 truncate dark:text-gray-400">{{$ticket->nome}}</P>
+                               
+
                             </div>
                         </div>
                         </li>
