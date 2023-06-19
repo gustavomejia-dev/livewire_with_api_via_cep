@@ -19,10 +19,6 @@ class ListandoTickets extends Component
 
     protected $queryString = ['searchTicket', 'searchTicketStatus'];
 
-    public function mount(){
-        
-        
-    }
 
     public function getTechnicalsProperty(){
         $technicals = Technical::all();
@@ -51,6 +47,10 @@ class ListandoTickets extends Component
         return $tickets->orderBy('tickets.created_at')->get();//aqui é paginate
     }
     
+
+    public function selectedManyTickets(){
+        
+    }
     public function render()
     {
         return view('livewire.listando-tickets')->layout('layouts.tickets');

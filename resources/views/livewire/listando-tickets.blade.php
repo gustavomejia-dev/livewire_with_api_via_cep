@@ -1,5 +1,5 @@
 
-<main x-data = "{'showModal' : false }" @keydown.escape="showModal = false" class="bg-slate-00 flex flex-row bg-state-300" >
+<main x-data = "{'showModal' : false }" @keydown.escape="showModal = false" class="bg-slate-300 flex flex-row" >
     
     <div> 
         <x-sidebar/> 
@@ -8,7 +8,7 @@
     <section class="mt-[5%] flex-row h-screen justify-center items-center ml-[10%]">
          {{-- aqui está carregando os chamados com um link para mandar para uma modal referente ao ticket --}}
             {{-- FILTROS --}}
-            <div class="w-[1400px] bg-slate-200 min-w-[1200px] marker:shadow p-5 rounded-lg">
+            <div class="w-[1400px] bg-slate-100 min-w-[1200px] marker:shadow p-5 rounded-lg">
                 <div class="relative">
                   <div class="absolute flex items-center ml-2 h-full">
                     <svg class="w-4 h-4 fill-current text-primary-gray-dark" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,12 +52,15 @@
         {{-- aqui está carregando os chamados com um link para mandar para uma modal referente ao ticket --}}
             <div class= "cursor-pointer w-[100%] max-lg:" onclick = openModal({{$ticket->id}})>
                 
-                <div class="flex justify-center items-top border rounded-md border-x-slate-500 h-26 my-6">
+                <div class="flex justify-center border rounded-lg border-x-slate-800 h-26 my-6 bg-slate-100">
                     
+                    <div class="w-40 self-center">
+                        <input class ="w-[20px] h-[25px]" type="checkbox" wire:model id="">
+                    </div>
                     <ul class= "w-[800px] justify-center h-auto divide-y divide-gray-200 dark:divide-gray-700 my-2" @click="showModal = true" >
                         <li class="pb-3 sm:pb-4">
-                        <div class="flex items-center space-x-12">
-                        
+                        <div class="flex items-center space-x-24">
+                            
                             <div class="flex-2">
                                 <p class="py-6 text-sm font-medium text-gray-900 truncate dark:text-white">
                                     ID do Ticket
