@@ -11,5 +11,7 @@ class Technical extends Model
     protected $fillable = [
         'nome',
         'setor',
+        'technical_email',
+        
     ];
 }
