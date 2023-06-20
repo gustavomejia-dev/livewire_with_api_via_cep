@@ -6,6 +6,7 @@ use App\Models\Technical;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Ticket extends Model
 {
@@ -19,9 +20,9 @@ class Ticket extends Model
         'technical_id'
     ];
 
-    public function technicals(): HasOne
-    {
-        return $this->hasOne(Technical::class,'foreign_key');
+    public function technical():BelongsTo{
+        return $this->belongsTo(Technical::class);
     }
+
 
 }

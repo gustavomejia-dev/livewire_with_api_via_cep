@@ -36,7 +36,8 @@ class ListandoTickets extends Component
         
     }
     public function getTicketsProperty(){
-        $tickets = Ticket::select('*');
+        $tickets = Technical::join('tickets', 'technicals.id', '=', 'tickets.technical_id');
+       
         if($this->searchTicket){
             $tickets->where('tickets.assunto', 'LIKE', "%{$this->searchTicket}%");
         }
