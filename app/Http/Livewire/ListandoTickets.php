@@ -16,9 +16,15 @@ class ListandoTickets extends Component
 
     public string $searchTechnical = '*';
     public array $data = [];
+    public array $selectedMoreTickets = [];
+    
 
-    protected $queryString = ['searchTicket', 'searchTicketStatus'];
 
+    protected $queryString = ['searchTicket', 'searchTicketStatus', 'searchTechnical'];
+
+    public function mount(){
+        $this->selectedMoreTickets;
+    }    
 
     public function getTechnicalsProperty(){
         $technicals = Technical::all();
@@ -30,25 +36,35 @@ class ListandoTickets extends Component
         
     }
     public function getTicketsProperty(){
-        $tickets  = Ticket::join('technicals', 'technicals.id', 'tickets.technical_id');
+        $tickets = Ticket::select('*');
         if($this->searchTicket){
-
             $tickets->where('tickets.assunto', 'LIKE', "%{$this->searchTicket}%");
-            
         }
-
         if($this->searchTechnical != "*"){
-            $tickets->where('technicals.technical_id', '=', "{$this->searchTechnical}");
+            $tickets->where('technicals.id', '=', "{$this->searchTechnical}");
+
         }
         if($this->searchTicketStatus != "*"){
             $tickets->where('tickets.status', '=', "{$this->searchTicketStatus}");
         }
-
         return $tickets->orderBy('tickets.created_at')->get();//aqui é paginate
     }
     
 
-    public function selectedManyTickets(){
+    public function deleteManyTicketsOrOneTicket(){
+        if($this->selectedMoreTickets){
+            Ticket::whereIn('tickets.id', $this->selectedMoreTickets)->delete(); 
+            return $this->render();
+
+        }   
+        
+        // if ($this->deleteTicket != ''){
+        //     array_push($this->deleteMoreTickets, $this->deleteTicket);
+        //     }
+        // var_dump($this->deleteMoreTickets);    
+
+        
+        
         
     }
     public function render()

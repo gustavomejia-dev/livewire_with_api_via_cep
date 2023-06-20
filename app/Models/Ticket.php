@@ -19,7 +19,7 @@ class Ticket extends Model
         'technical_id'
     ];
 
-    public function address(): HasOne
+    public function technicals(): HasOne
     {
         return $this->hasOne(Technical::class,'foreign_key');
     }

@@ -14,4 +14,9 @@ class Technical extends Model
         'technical_email',
         
     ];
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }
