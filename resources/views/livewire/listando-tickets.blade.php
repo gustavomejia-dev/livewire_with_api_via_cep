@@ -6,17 +6,16 @@
 {{-- FIM DO HEADER --}}
 <main  x-data = "{'showModal' : false }" @keydown.escape="showModal = false" class="rounded-l-lg w-[90%] bg-blue-400 flex flex-col mt-[5%] ml-[5%]" > 
     
-    <nav x-show="open" x-transition:enter.duration.800ms x-transition:leave.duration.800ms  class="px-4 mt-[5%] items-center ml-[10%] rounded-lg bg-white w-1/2 h-16 flex flex-inline">
-        <h1>Funções Rápidas: </h1>
-        
-            <div class="px-12">
-            <button class="w-[108px] cursor-pointer bg-slate-300 hover:bg-slate-500 h-8 rounded-lg mx-2">
-                    Alterar Status        
-                </button>
+    <nav x-show="open" x-transition:enter.duration.800ms x-transition:leave.duration.800ms  class="space-x-4  px-4 mt-[5%] items-center ml-[10%] rounded-lg bg-white w-1/2 h-16 flex flex-inline">
+            <h1>Funções Rápidas: </h1>
+           
+                <x-button rounded dark label="Editar Status" />
+
+           
                 <x-button rounded info label="Editar Técnico" />
-                {{-- btn que exclui os tickets selecionados --}}
-                <x-button rounded red label="Excluir" wire:click="deleteManyTicketsOrOneTicket"/>
-            </div>
+            
+               {{-- btn que exclui os tickets selecionados --}}
+               <x-button class="px-4" rounded red label="Excluir" wire:click="deleteManyTicketsOrOneTicket"/>
             {{-- fim do btn que exclui os tickets selecionados --}}
     </nav>    
 
