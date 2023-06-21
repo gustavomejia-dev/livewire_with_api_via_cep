@@ -16,7 +16,7 @@ class ListandoTickets extends Component
 
     public string $searchTechnical = '*';
     public array $data = [];
-    public array $selectedMoreTickets = [];
+    public array $selectedMoreTickets = [];//atributo que seleciona as checkbox que estão dentro da listagem de tickets
     
 
 
