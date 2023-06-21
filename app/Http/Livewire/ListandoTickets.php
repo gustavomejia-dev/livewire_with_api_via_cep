@@ -63,10 +63,12 @@ class ListandoTickets extends Component
         //     array_push($this->deleteMoreTickets, $this->deleteTicket);
         //     }
         // var_dump($this->deleteMoreTickets);    
+    }
 
-        
-        
-        
+    public function updateManyTechnicalsOrOneTechnical(){
+        if($this->selectedMoreTickets){
+            
+        }
     }
     public function render()
     {

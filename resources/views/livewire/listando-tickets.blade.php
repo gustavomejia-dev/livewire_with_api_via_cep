@@ -1,28 +1,28 @@
 {{-- HEADER --}}
-<div class="flex flex-row" x-data="{open: false}">
+<div class="flex flex-row w-[100%]" x-data="{open: false}">
 <header class="w-40"> 
     <x-sidebar/> 
 </header>
 {{-- FIM DO HEADER --}}
-<main  x-data = "{'showModal' : false }" @keydown.escape="showModal = false" class="rounded-l-lg w-[90%] bg-blue-400 flex flex-col mt-[5%] ml-[5%]" > 
+<main  x-data = "{'showModal' : false }" @keydown.escape="showModal = false" class="rounded-l-lg w-screen bg-blue-400 flex flex-col mt-[5%] ml-[5%]" > 
     
-    <nav x-show="open" x-transition:enter.duration.800ms x-transition:leave.duration.800ms  class="space-x-4  px-4 mt-[5%] items-center ml-[10%] rounded-lg bg-white w-1/2 h-16 flex flex-inline">
+    <nav x-show="open" x-transition:enter.duration.800ms x-transition:leave.duration.800ms  class="space-x-4  px-4 mt-[5%] items-center ml-[10%] rounded-lg bg-white w-[700px] h-16 flex flex-inline">
             <h1>Funções Rápidas: </h1>
            
                 <x-button rounded dark label="Editar Status" />
 
            
-                <x-button rounded info label="Editar Técnico" />
+                <x-button rounded info label="Editar Técnico" wire:click="updateManyTechnicalsOrOneTechnical"/>
             
                {{-- btn que exclui os tickets selecionados --}}
                <x-button class="px-4" rounded red label="Excluir" wire:click="deleteManyTicketsOrOneTicket"/>
             {{-- fim do btn que exclui os tickets selecionados --}}
     </nav>    
 
-    <section class="mt-[5%] flex-row h-screen justify-center items-center ml-[10%] w-1/2">
+    <section class="mt-[5%] flex-row h-screen justify-center items-center ml-[10%] w-[900px]">
          {{-- aqui está carregando os chamados com um link para mandar para uma modal referente ao ticket --}}
             {{-- FILTROS --}}
-            <div class="w-[100%] bg-slate-200 min-w-[1000px] marker:shadow p-5 rounded-lg">
+            <section class="bg-slate-200 w-auto marker:shadow p-5 rounded-lg">
                 <div class="relative">
                   <div class="absolute flex items-center ml-2 h-full">
                     <svg class="w-4 h-4 fill-current text-primary-gray-dark" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
