@@ -60,11 +60,12 @@ class ListandoTickets extends Component
     }
 
     public function updateManyTechnicalsOrOneTechnical(){
-        $teste = '1';
         if($this->selectedMoreTickets && $this->changeTechnical){//itens selecionados para ser feito o procedimento
-        return Technical::join('tickets', 'technicals.id', '=', 'tickets.technical_id')
-            ->whereIn('tickets.id', $this->selectedMoreTickets)->update(['tickets.technical_id' => $this->changeTechnical]);
-           
+            Technical::join('tickets', 'technicals.id', '=', 'tickets.technical_id')
+                ->whereIn('tickets.id', $this->selectedMoreTickets)->update(['tickets.technical_id' => $this->changeTechnical]);
+            $this->selectedMoreTickets = [];
+            $this->changeTechnical = '';   
+            return; 
         }
     }
     public function render()
