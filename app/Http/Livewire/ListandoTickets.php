@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Http\Livewire\SearchTicket;
 use App\Models\Technical;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class ListandoTickets extends Component
 {   
@@ -15,11 +16,9 @@ class ListandoTickets extends Component
     public string $searchTicketStatus = '*';
 
     public string $searchTechnical = '*';
-    public array $data = [];
     public array $selectedMoreTickets = [];//atributo que seleciona as checkbox que estão dentro da listagem de tickets
     
-
-
+    public string $changeTechnical = '';
     protected $queryString = ['searchTicket', 'searchTicketStatus', 'searchTechnical'];
 
     public function mount(){
@@ -53,21 +52,19 @@ class ListandoTickets extends Component
     
 
     public function deleteManyTicketsOrOneTicket(){
-        if($this->selectedMoreTickets){
+        if($this->selectedMoreTickets){//itens selecionados para ser feito o procedimento
             Ticket::whereIn('tickets.id', $this->selectedMoreTickets)->delete(); 
             return $this->render();
 
-        }   
-        
-        // if ($this->deleteTicket != ''){
-        //     array_push($this->deleteMoreTickets, $this->deleteTicket);
-        //     }
-        // var_dump($this->deleteMoreTickets);    
+        }     
     }
 
     public function updateManyTechnicalsOrOneTechnical(){
-        if($this->selectedMoreTickets){
-            
+        $teste = '1';
+        if($this->selectedMoreTickets && $this->changeTechnical){//itens selecionados para ser feito o procedimento
+        return Technical::join('tickets', 'technicals.id', '=', 'tickets.technical_id')
+            ->whereIn('tickets.id', $this->selectedMoreTickets)->update(['tickets.technical_id' => $this->changeTechnical]);
+           
         }
     }
     public function render()

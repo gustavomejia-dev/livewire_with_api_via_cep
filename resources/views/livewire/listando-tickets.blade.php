@@ -6,29 +6,31 @@
 {{-- FIM DO HEADER --}}
 
 
-<main  x-data = "{'showModal' : false }" @keydown.escape="showModal = false" class="rounded-l-lg w-screen bg-blue-400 flex flex-col mt-[5%] ml-[5%]" > 
+<main  x-data = "{'showModal' : false}" @keydown.escape="showModal = false" class="rounded-l-lg w-screen bg-blue-400 flex flex-col mt-[5%] ml-[5%]" > 
     
-    <nav x-show="open" x-transition:enter.duration.800ms x-transition:leave.duration.800ms  class="space-x-4  px-4 mt-[5%] items-center ml-[10%] rounded-lg bg-white w-[700px] h-16 flex flex-inline">
-            <h1>Funções Rápidas: </h1>
-           
-               
-
-                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
-                 <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected>Mudar Técnico</option>
-                        @foreach ($this->technicals as $technical)
-                        <option value="US">{{ $technical->nome }}</option>
-                        @endforeach
-        
-                 </select>
-               
+    <nav x-show="open" x-transition:enter.duration.800ms x-transition:leave.duration.800ms  class="z-0 space-x-4  px-4 mt-[5%] items-center ml-[10%] rounded-lg bg-white w-[700px] h-32 flex flex-row">
+            <h1>Funções Rápidas: </h1>   
+                <div class="flex flex-col">
+                    <label for="countries" class="block mb-2 text-sm text-center font-medium text-gray-900 dark:text-white">Atribuição em Massa</label>
+                    <select onchange = alterarTickets()  wire:model.defer = "changeTechnical" id="technicals" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="*" selected>Selecione o Técnico</option>
+                            @foreach ($this->technicals as $technical)
+                                <option value="{{$technical->id}}">{{ $technical->nome }}</option>
+                            @endforeach
+            
+                    </select>
+                </div>
             
                {{-- btn que exclui os tickets selecionados --}}
                <x-button class="px-4" rounded red label="Excluir" wire:click="deleteManyTicketsOrOneTicket"/>
             {{-- fim do btn que exclui os tickets selecionados --}}
+            
     </nav>    
-
+    <div id = "modalAlterarTicket" class="align-middle justify-center hidden bg-black">    
+        <x-alert/>
+    </div> 
     <section class="mt-[5%] flex-row h-screen justify-center items-center ml-[10%] w-[900px]">
+        
          {{-- aqui está carregando os chamados com um link para mandar para uma modal referente ao ticket --}}
             {{-- FILTROS --}}
             <section class="bg-slate-200 w-auto marker:shadow p-5 rounded-lg">
