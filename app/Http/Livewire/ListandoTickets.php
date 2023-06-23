@@ -61,6 +61,7 @@ class ListandoTickets extends Component
     }
 
     public function updateManyTechnicalsOrOneTechnical(){
+        //testando essa função
         $teste = $this->changeStatus ? ['tickets.status' => $this->changeStatus] : ['tickets.technical_id' => $this->changeTechnical];
         if($this->selectedMoreTickets && array_values($teste)){//itens selecionados para ser feito o procedimento
             Technical::join('tickets', 'technicals.id', '=', 'tickets.technical_id')
