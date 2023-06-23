@@ -19,6 +19,20 @@
                             @endforeach
             
                     </select>
+
+        
+                
+                </div>
+                <div class="flex flex-col">
+                    <label for="countries" class="block mb-2 text-sm text-center font-medium text-gray-900 dark:text-white">Atribuição em Massa</label>
+                    <select id = "status" onchange=alterarTickets() wire:model.defer = "changeStatus" class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+                        <option value="*" selected>Todos</option>
+                        <option value="R">Resolvido</option>
+                        <option value="P">Pendente</option>
+                        <option value="A">Aberto</option>
+                  </select> 
+
+        
                 </div>
             
                {{-- btn que exclui os tickets selecionados --}}

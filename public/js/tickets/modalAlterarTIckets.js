@@ -1,7 +1,7 @@
 function alterarTickets(){
     
-    if(document.getElementById('technicals').value != '*') 
-    {
+    if(document.getElementById('technicals').value != '*' || document.getElementById('status').value != '*') 
+    {   
         document.getElementById('modalAlterarTicket').style.display = 'block';
         
     }
