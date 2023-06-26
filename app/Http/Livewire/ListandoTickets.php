@@ -21,11 +21,7 @@ class ListandoTickets extends Component
     public string $changeTechnical = '';
     public string $changeStatus = '';
     protected $queryString = ['searchTicket', 'searchTicketStatus', 'searchTechnical'];
-
-    public function mount(){
-        $this->selectedMoreTickets;
-    }    
-
+  
     public function getTechnicalsProperty(){
         $technicals = Technical::all();
         return $technicals;
@@ -60,20 +56,27 @@ class ListandoTickets extends Component
         }     
     }
 
-    public function updateManyTechnicalsOrOneTechnical(){
+    public function updateManyTechnicalsOrManyStatus(){
         //testando essa função
-        $teste = $this->changeStatus ? ['tickets.status' => $this->changeStatus] : ['tickets.technical_id' => $this->changeTechnical];
-        if($this->selectedMoreTickets && array_values($teste)){//itens selecionados para ser feito o procedimento
+        
+        $changeStatusOrChangeTechnical = $this->changeStatus ? ['tickets.status' => $this->changeStatus] : ['tickets.technical_id' => $this->changeTechnical];
+        if($this->selectedMoreTickets && array_values($changeStatusOrChangeTechnical)){//itens selecionados para ser feito o procedimento
             Technical::join('tickets', 'technicals.id', '=', 'tickets.technical_id')
-                ->whereIn('tickets.id', $this->selectedMoreTickets)->update($teste);
-            $this->selectedMoreTickets = [];
-            $this->changeTechnical = '';   
-            return; 
+                ->whereIn('tickets.id', $this->selectedMoreTickets)
+                ->update($changeStatusOrChangeTechnical);
+                
+            // $this->selectedMoreTickets = [];
+            $this->changeTechnical = ''; 
+            $this->changeStatus = '';   
+            return ;
+            
         }
+        
     }
-  
+    
     public function render()
     {
-        return view('livewire.listando-tickets')->layout('layouts.tickets');
+        return view('livewire.listando-tickets')
+        ->layout('layouts.tickets');
     }
 }

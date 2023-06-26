@@ -7,7 +7,7 @@
 
 
 <main  x-data = "{'showModal' : false}" @keydown.escape="showModal = false" class="rounded-l-lg w-screen bg-blue-400 flex flex-col mt-[5%] ml-[5%]" > 
-    
+
     <nav x-show="open" x-transition:enter.duration.800ms x-transition:leave.duration.800ms  class="z-0 space-x-4  px-4 mt-[5%] items-center ml-[10%] rounded-lg bg-white w-[700px] h-32 flex flex-row">
             <h1>Funções Rápidas: </h1>   
                 <div class="flex flex-col">
@@ -41,7 +41,7 @@
             
     </nav>    
     <div id = "modalAlterarTicket" class="align-middle justify-center hidden bg-black">    
-        <x-alert/>
+        <livewire:alert/>
     </div> 
     <section class="mt-[5%] flex-row h-screen justify-center items-center ml-[10%] w-[900px]">
         
