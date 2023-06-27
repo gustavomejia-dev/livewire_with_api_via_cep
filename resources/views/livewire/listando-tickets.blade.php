@@ -6,7 +6,7 @@
 {{-- FIM DO HEADER --}}
 
 
-<main  x-data = "{'showModal' : false}" @keydown.escape="showModal = false" class="rounded-l-lg w-screen bg-blue-400 flex flex-col mt-[5%] ml-[5%]" > 
+<main  x-data = "{'showModal' : false, 'count' : 0}" @keydown.escape="showModal = false" class="rounded-l-lg w-screen bg-blue-400 flex flex-col mt-[5%] ml-[5%]" > 
 
     <nav x-show="open" x-transition:enter.duration.800ms x-transition:leave.duration.800ms  class="z-0 space-x-4  px-4 mt-[5%] items-center ml-[10%] rounded-lg bg-white w-[700px] h-32 flex flex-row">
             <h1>Funções Rápidas: </h1>   
@@ -41,7 +41,7 @@
             
     </nav>    
     <div id = "modalAlterarTicket" class="align-middle justify-center hidden bg-black">    
-        <livewire:alert/>
+        <x-alert/>
     </div> 
     <section class="mt-[5%] flex-row h-screen justify-center items-center ml-[10%] w-[900px]">
         
@@ -83,15 +83,17 @@
                 </select>  
             </div>
         </div>
+        <h1 x-text="count"></h1>
             {{-- fim da ordenação dos status do ticket --}}
         @foreach ($this->tickets as $ticket)
         
         {{-- aqui está carregando os chamados com um link para mandar para uma modal referente ao ticket --}}
             <div class= "cursor-pointer w-[100%] max-lg:" onclick = openModal({{$ticket->id}})>
                 
-                <div class="flex justify-center border rounded-lg border-x-slate-800 h-26 my-6 bg-slate-100">
+                <div  class="flex justify-center border rounded-lg border-x-slate-800 h-26 my-6 bg-slate-100">
                     <div class="w-40 self-center pl-4">
-                        <input x-on:click="open = true" class ="pl-4 w-[20px] h-[25px]" type="checkbox" wire:model.defer="selectedMoreTickets.{{$ticket->id}}" id="selectedMoreTickets.{{$ticket->id}}" value = "{{$ticket->id}}">
+                        <input  x-on:change="count = ($event.target.checked) ? count+=1 : count-=1"
+                         x-on:click="open = true" class ="pl-4 w-[20px] h-[25px]" type="checkbox" wire:model.defer="selectedMoreTickets.{{$ticket->id}}" id="selectedMoreTickets.{{$ticket->id}}" value = "{{$ticket->id}}">
                     </div>
                     <ul class= "w-[800px] justify-center h-auto divide-y divide-gray-200 dark:divide-gray-700 my-2" @click="showModal = true" >
                         <li class="pb-3 sm:pb-4">
