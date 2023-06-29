@@ -68,7 +68,7 @@ class ListandoTickets extends Component
             // $this->selectedMoreTickets = [];
             $this->changeTechnical = ''; 
             $this->changeStatus = '';   
-            return ;
+            
             
         }
         
