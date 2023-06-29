@@ -6,9 +6,54 @@
 {{-- FIM DO HEADER --}}
 
 
-<main  x-data = "{'showModal' : false, 'count' : 0, 'excluirSim' : false}" @keydown.escape="showModal = false" class="rounded-l-lg w-screen bg-blue-400 flex flex-col mt-[5%] ml-[5%]" > 
-
-    <nav x-show="open" x-transition:enter.duration.800ms x-transition:leave.duration.800ms  class="z-0 space-x-4  px-4 mt-[5%] items-center ml-[10%] rounded-lg bg-white w-[700px] h-32 flex flex-row">
+<main  x-data = "{'showModal' : false, 'count' : 0, 'excluirSim' : false}" @keydown.escape="showModal = false" class="rounded-l-lg w-screen h-auto bg-blue-400 flex flex-col mt-[5%] ml-[5%]" > 
+    <div class="filament-stats grid gap-4 lg:gap-8 md:grid-cols-3 m-5">
+        <div class="filament-stats-card relative p-6 rounded-2xl bg-white shadow dark:bg-gray-800 filament-stats-overview-widget-card">
+        <div class="space-y-2">
+            <div class="flex items-center space-x-2 rtl:space-x-reverse text-sm font-medium text-gray-500 dark:text-gray-200">
+                
+                <span>Tickets Abertos</span>
+            </div>
+    
+            <div class="text-3xl">
+                {{count($this->status['A'])}}
+            </div>
+    
+                </div>
+    
+        </div>
+    
+        <div class="filament-stats-card relative p-6 rounded-2xl bg-white shadow dark:bg-gray-800 filament-stats-overview-widget-card">
+            <div class="space-y-2">
+                    <div class="flex items-center space-x-2 rtl:space-x-reverse text-sm font-medium text-gray-500 dark:text-gray-200">
+                        
+                        <span>Tickets Resolvidos</span>
+                    </div>
+            
+                    <div class="text-3xl">
+                        {{count($this->status['R'])}}
+                    </div>
+            
+            </div>
+        
+        </div>
+    
+        <div class="filament-stats-card relative p-6 rounded-2xl bg-white shadow dark:bg-gray-800 filament-stats-overview-widget-card">
+        <div class="space-y-2">
+            <div class="flex items-center space-x-2 rtl:space-x-reverse text-sm font-medium text-gray-500 dark:text-gray-200">
+                
+                <span>Tickets Pendentes</span>
+            </div>
+    
+            <div class="text-3xl">
+                {{count($this->status['P'])}}
+            </div>
+    
+                </div>
+    
+        </div>
+    </div>
+    <nav x-show="open" x-transition:enter.duration.800ms x-transition:leave.duration.800ms  class="z-0 space-x-4  px-4 mt-[1%] items-center ml-[10%] rounded-lg bg-white w-[1200px] h-44 flex flex-row">
             <h1>Funções Rápidas: </h1>   
                 <div class="flex flex-col">
                     <label for="countries" class="block mb-2 text-sm text-center font-medium text-gray-900 dark:text-white">Atribuição em Massa</label>
@@ -43,7 +88,7 @@
     <div id = "modalAlterarTicket" class="align-middle justify-center hidden bg-black">    
         <x-alert/>
     </div> 
-    <section class="mt-[5%] flex-row h-screen justify-center items-center ml-[10%] w-[900px]">
+    <section class="mt-[5%] flex-row h-screen justify-center items-center ml-[10%] w-[1200px]">
         
          {{-- aqui está carregando os chamados com um link para mandar para uma modal referente ao ticket --}}
             {{-- FILTROS --}}

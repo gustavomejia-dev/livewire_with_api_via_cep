@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class ListandoTickets extends Component
 {   
     public string $searchTicket = '';
-
+    protected array $data = [];
     public string $searchTicketStatus = '*';
 
     public string $searchTechnical = '*';
@@ -26,11 +26,21 @@ class ListandoTickets extends Component
         $technicals = Technical::all();
         return $technicals;
     }
-    // public function getNamesProperty(){
-    //         $names = Ticket::select('nome_remetente')->get();
-    //         return $names; 
+    
+
+    public function getStatusProperty(){
+        $ticketsAbertos = Ticket::select('status')->where('status', '=', 'A')->get();
         
-    // }
+        $tickersPendentes = Ticket::select('status')->where('status', '=', 'P')->get();
+        $ticketsResolvidos = Ticket::select('status')->where('status', '=', 'R')->get();
+        
+        $geral = array('A' => $ticketsAbertos, 'P' => $tickersPendentes, 'R' => $ticketsResolvidos);
+       
+        return $geral;
+    }
+public function mount(){
+    $this->getStatusProperty();
+}
     public function getTicketsProperty(){
         $tickets = Technical::join('tickets', 'technicals.id', '=', 'tickets.technical_id');
        
@@ -56,6 +66,8 @@ class ListandoTickets extends Component
         }     
     }
 
+
+
     public function updateManyTechnicalsOrManyStatus(){
         //testando essa função
         
@@ -65,7 +77,7 @@ class ListandoTickets extends Component
                 ->whereIn('tickets.id', $this->selectedMoreTickets)
                 ->update($changeStatusOrChangeTechnical);
                 
-            // $this->selectedMoreTickets = [];
+            $this->selectedMoreTickets = [];
             $this->changeTechnical = ''; 
             $this->changeStatus = '';   
             
@@ -79,4 +91,6 @@ class ListandoTickets extends Component
         return view('livewire.listando-tickets')
         ->layout('layouts.tickets');
     }
+
+
 }
