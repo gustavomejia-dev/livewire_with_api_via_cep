@@ -9,12 +9,18 @@
       <div class = "w-0" x-show="open" x-transition:enter.duration.800ms x-transition:leave.duration.800ms>
             <div class="justify-between mt-6 rounded-md">
                 <nav class=" bg-blue-400 w-40 h-screen rounded-r-lg border-slate-100 border-r-4">
-                    <a href = "" class="flex items-center px-4 py-2 mt-5 text-gray-200 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="">
+                    <a href = "{{route('loginSistema')}}" class="flex items-center px-4 py-2 mt-5 text-gray-200 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="">
                         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        <span class="mx-4 font-medium">Login</span>
+                        <form action="{{route('SairSistema')}}" method="GET">
+                            @csrf
+                            <input name="sair" type="hidden" value={{isset($_SESSION['email']) ? '1' : '2'}}>
+                            <button ><span class="mx-4 font-medium">{{!isset($_SESSION['email']) ? 'Sair' : 'Login' }}</span></button>
+                        </form>
+                               
+                           
                     </a>
         
                     <a class="flex items-center px-4 py-2 mt-5 text-gray-200 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="{{ route('ticket') }}">

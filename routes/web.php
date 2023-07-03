@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Tickets\LoginController;
 use App\Http\Controllers\SidebarController;
 use App\Http\Controllers\TicketController;
 use App\Http\Livewire\ListandoTickets;
@@ -18,9 +19,17 @@ use \App\Http\Livewire\SearchZipcode;
 */
 
 Route::get('/',SearchZipcode::class)->name('search-zipcode');
-Route::get('/sistema/show/ticket', ListandoTickets::class)->name('showTickets');
-Route::get('/sistema/tickets',[TicketController::class, 'index'])->name('ticket');
-Route::post('/sistema/create/ticket', [TicketController::class, 'store'])->name('createTicket');
+Route::middleware('autenticacao')->prefix('/sistema')->group(function(){
+    Route::get('/show/ticket', ListandoTickets::class)->name('showTickets');
+    Route::get('/tickets',[TicketController::class, 'index'])->name('ticket');
+    Route::post('/create/ticket', [TicketController::class, 'store'])->name('createTicket');
+});
+// Route::get('/sistema/show/ticket', ListandoTickets::class)->name('showTickets');
+// Route::get('/sistema/tickets',[TicketController::class, 'index'])->name('ticket');
+// Route::post('/sistema/create/ticket', [TicketController::class, 'store'])->name('createTicket');
+Route::post('/login', [LoginController::class,'autenticar'])->name('loginSistema');
+Route::get('/sair', [LoginController::class,'deslogar'])->name('SairSistema');
+Route::get('/login{erro?}', [LoginController::class, 'index'])->name('loginSistema');
 // Route::get('/sistema/show/ticket', [TicketController::class,'list'])->name('showTickets');
 Route::get('sistema/edit/ticket/{id?}', [TicketController::class, 'edit'])->name('editTicket');
 Route::post('sistema/update/ticket', [TicketController::class, 'update'])->name('updateTicket');
