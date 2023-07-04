@@ -15,12 +15,14 @@ class AutenticacaoMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {   
+        // dd('está no middleware');
         session_start();
         if(isset($_SESSION['email']) && $_SESSION['email'] != ''){
             return $next($request);
         }
 
         else{
+            dd('você não está logado');
             return redirect()->route('loginSistema', ['erro' => 2]);
         }
     }

@@ -17,7 +17,9 @@
                         <form action="{{route('SairSistema')}}" method="GET">
                             @csrf
                             <input name="sair" type="hidden" value={{isset($_SESSION['email']) ? '1' : '2'}}>
-                            <button ><span class="mx-4 font-medium">{{!isset($_SESSION['email']) ? 'Sair' : 'Login' }}</span></button>
+                            <button >
+                                <span class="mx-4 font-medium">{{isset($_SESSION['email']) ? 'Sair' : 'Login' }}</span>
+                            </button>
                         </form>
                                
                            
