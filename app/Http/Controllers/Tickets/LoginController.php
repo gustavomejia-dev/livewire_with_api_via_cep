@@ -51,7 +51,7 @@ class LoginController extends Controller
             session_start();
             $_SESSION['nome'] = $user->name;
             $_SESSION['email'] = $user->email;
-            return redirect()->route('search-zipcode');
+            return redirect()->route('showTickets');
         }
         else{
             dd('usuario não existe');

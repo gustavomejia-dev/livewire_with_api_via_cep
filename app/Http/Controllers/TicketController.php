@@ -97,6 +97,9 @@ class TicketController extends Controller
         //
     }
 
+    public function admin(){
+        return view('tickets.admin');
+    }
 
 
 }
