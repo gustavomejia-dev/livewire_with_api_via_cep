@@ -98,7 +98,7 @@ class TicketController extends Controller
     }
 
     public function admin(){
-        return view('tickets.admin');
+        return view('layouts.admin');
     }
 
 
